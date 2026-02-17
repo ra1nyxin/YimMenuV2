@@ -7,6 +7,7 @@
 #include "game/frontend/items/Items.hpp"
 #include "game/frontend/items/DrawHotkey.hpp"
 #include "game/frontend/submenus/Settings/LuaScripts.hpp"
+#include "game/frontend/submenus/Settings/GUISettings.hpp"
 
 namespace YimMenu::Submenus
 {
@@ -35,6 +36,8 @@ namespace YimMenu::Submenus
 
 		for (auto& [name, link] : sortedCommands)
 		{
+			if (name.empty())
+				continue;
 			DrawHotkey(link, name);
 		}
 	};
@@ -109,6 +112,7 @@ namespace YimMenu::Submenus
 		AddCategory(std::move(hotkeys));
 		AddCategory(std::move(gui));
 		AddCategory(std::move(game));
+		AddCategory(DrawGUISettingsMenu());
 		AddCategory(BuildLuaScriptsMenu());
 	}
 }
