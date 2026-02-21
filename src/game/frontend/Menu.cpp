@@ -70,17 +70,72 @@ namespace YimMenu
 		return &ranges[0];
 	}
 
-	static ImFont* CreateFontWithCyrillicSupport(ImGuiIO& io, float size)
+	static const ImWchar* GetGlyphRangesChinese()
+	{
+		static const ImWchar ranges[] =
+		    {
+		        0x0020,
+		        0x00FF, // Basic Latin + Latin Extended
+		        0x0400,
+		        0x052F, // Cyrillic + Cyrillic Supplement
+		        0x2DE0,
+		        0x2DFF, // Cyrillic Extended-A
+		        0xA640,
+		        0xA69F, // Cyrillic Extended-B
+		        0x4E00,
+		        0x9FFF, // CJK Unified Ideographs
+		        0x3000,
+		        0x303F, // CJK Symbols and Punctuation
+		        0xFF00,
+		        0xFFEF, // Fullwidth Forms
+		        0x2000,
+		        0x206F, // General Punctuation
+		        0,
+		    };
+		return &ranges[0];
+	}
+
+	static ImFont* CreateFontWithMultiLanguageSupport(ImGuiIO& io, float size)
 	{
 		ImFontConfig FontCfg{};
 		FontCfg.FontDataOwnedByAtlas = false;
 
 		auto font = io.Fonts->AddFontFromMemoryTTF(const_cast<std::uint8_t*>(Fonts::MainFont), sizeof(Fonts::MainFont), size, &FontCfg, io.Fonts->GetGlyphRangesDefault());
 
-		// just use Arial for Cyrillic
-
 		FontCfg.MergeMode = true;
-		io.Fonts->AddFontFromFileTTF((std::filesystem::path(std::getenv("SYSTEMROOT")) / "Fonts" / "arial.ttf").string().c_str(), size, &FontCfg, GetGlyphRangesCyrillicOnly());
+
+		// Try to use system Chinese font (Microsoft YaHei, SimHei, or fallback to Arial)
+		auto tryAddFont = [&io, &FontCfg, size](const std::wstring& fontName) -> bool {
+			try
+			{
+				std::filesystem::path fontPath = std::filesystem::path(std::getenv("SYSTEMROOT")) / "Fonts" / fontName;
+				if (std::filesystem::exists(fontPath))
+				{
+					io.Fonts->AddFontFromFileTTF(fontPath.string().c_str(), size, &FontCfg, GetGlyphRangesChinese());
+					return true;
+				}
+			}
+			catch (...)
+			{
+			}
+			return false;
+		};
+
+		// Try multiple Chinese fonts in order of preference
+		if (!tryAddFont(L"msyh.ttc"))
+		{ // Microsoft YaHei
+			if (!tryAddFont(L"msyh.ttf"))
+			{ // Microsoft YaHei (TTF version)
+				if (!tryAddFont(L"simhei.ttf"))
+				{ // SimHei
+					if (!tryAddFont(L"simsun.ttc"))
+					{ // SimSun
+						// Fallback to Arial if no Chinese font available
+						io.Fonts->AddFontFromFileTTF((std::filesystem::path(std::getenv("SYSTEMROOT")) / "Fonts" / "arial.ttf").string().c_str(), size, &FontCfg, GetGlyphRangesChinese());
+					}
+				}
+			}
+		}
 
 		io.Fonts->Build();
 
@@ -98,11 +153,11 @@ namespace YimMenu
 		FontCfg.FontDataOwnedByAtlas = false;
 
 		IO.Fonts->Clear();
-		Menu::Font::g_DefaultFont = CreateFontWithCyrillicSupport(IO, Menu::Font::g_DefaultFontSize);
-		Menu::Font::g_OptionsFont = CreateFontWithCyrillicSupport(IO, Menu::Font::g_OptionsFontSize);
-		Menu::Font::g_ChildTitleFont = CreateFontWithCyrillicSupport(IO, Menu::Font::g_ChildTitleFontSize);
-		Menu::Font::g_ChatFont = CreateFontWithCyrillicSupport(IO, Menu::Font::g_ChatFontSize);
-		Menu::Font::g_OverlayFont = CreateFontWithCyrillicSupport(IO, Menu::Font::g_OverlayFontSize);
+		Menu::Font::g_DefaultFont = CreateFontWithMultiLanguageSupport(IO, Menu::Font::g_DefaultFontSize);
+		Menu::Font::g_OptionsFont = CreateFontWithMultiLanguageSupport(IO, Menu::Font::g_OptionsFontSize);
+		Menu::Font::g_ChildTitleFont = CreateFontWithMultiLanguageSupport(IO, Menu::Font::g_ChildTitleFontSize);
+		Menu::Font::g_ChatFont = CreateFontWithMultiLanguageSupport(IO, Menu::Font::g_ChatFontSize);
+		Menu::Font::g_OverlayFont = CreateFontWithMultiLanguageSupport(IO, Menu::Font::g_OverlayFontSize);
 		static const ImWchar full_range[] = {0x0020, 0xFFFF, 0};
 		Menu::Font::g_AwesomeFont = IO.Fonts->AddFontFromMemoryTTF(const_cast<std::uint8_t*>(Fonts::IconFont), sizeof(Fonts::IconFont), Menu::Font::g_AwesomeFontSize, &FontCfg, full_range);
 
