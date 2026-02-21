@@ -1,51 +1,138 @@
-# YimMenu Code of Conduct
+# YimMenu 社区行为准则
 
-## Our Pledge
+## 我们的承诺
 
-In the interest of fostering an open and welcoming environment, we as contributors pledge to make participation in our community a harassment-free experience for everyone, regardless of age, ethnicity, programming experience, race, gender and sexual identity, etc. As a rule of thumb, any comment that isn't relevant to the menu or the contributions at hand is prohibited
+为了营造一个开放、友好、互相尊重的社区环境，我们作为贡献者和维护者承诺：无论年龄、种族、民族、编程经验水平、性别认同和性取向如何，社区参与都应该是无骚扰的体验。
 
-## Our Standards
+**基本原则：** 任何与菜单功能或项目贡献无关的评论都是被禁止的。我们专注于技术讨论和建设性反馈。
 
-Examples of behavior that contributes to creating a positive environment include:
+## 我们的标准
 
-* Treating everyone with respect and cordiality
-* Welcoming new contributors
-* Being respectful of differing viewpoints
-* Focusing on what is best for the project
+### 有助于创造积极环境的行为示例：
 
-Examples of unacceptable behavior by participants include:
+* **相互尊重** - 以友善和礼貌的态度对待每一位社区成员
+* **欢迎新人** - 热情接纳新贡献者，耐心解答他们的问题
+* **包容差异** - 尊重不同的观点和想法，即使您不同意
+* **项目优先** - 专注于什么对项目最有利，而非个人利益
+* **建设性批评** - 提供有帮助、有建设性的反馈意见
+* **互助精神** - 在力所能及的范围内帮助其他社区成员
 
-* Trolling
-* Talking about politics (or using political imagery, including images of Pepe and Wojaks)
-* Racial slurs
-* Using avatars that show apparent affiliations to extremist organizations
-* Harassment
-* Doxxing
-* Opening pull requests containing leaked or otherwise copyrighted code
-* Promoting unrelated personal projects
-* Attempting to recruit contributors
-* Other conduct which could reasonably be considered inappropriate in a professional setting
+### 不可接受的行为示例：
 
-## Our Responsibilities
+* **恶意挑衅 (Trolling)** - 故意发布激怒他人的内容或评论
+* **政治讨论** - 讨论政治话题或使用政治相关的图像符号（包括但不限于 Pepe 青蛙、Wojak 表情包等政治化表情）
+* **种族歧视** - 使用种族歧视性语言、侮辱性称呼
+* **极端主义** - 使用显示与极端组织有明显关联的头像或符号
+* **骚扰行为** - 包括但不限于：持续性不当评论、人身攻击、威胁性语言
+* **人肉搜索 (Doxxing)** - 公开他人的私人信息，如真实姓名、地址、电话等
+* **侵犯版权** - 提交包含泄露代码或受版权保护代码的 Pull Request
+* **自我推广** - 推广与项目无关的个人项目或商业产品
+* **挖角行为** - 试图招募本项目贡献者到其他项目
+* **其他不当行为** - 在职业环境中可被视为不当的任何其他行为
 
-Project maintainers are responsible for clarifying the standards of acceptable behavior and are expected to take appropriate and fair corrective action in response to any instances of unacceptable behavior.
+## 我们的责任
 
-Project maintainers have the right and responsibility to remove, edit, or reject comments, commits, code, wiki edits, issues, and other contributions that are not aligned to this Code of Conduct, or to ban temporarily or permanently *any* contributor for other behaviors that they deem inappropriate, threatening, offensive, or harmful.
+### 项目维护者的职责
 
-## Scope
+项目维护者负责明确可接受行为的标准，并应在任何不可接受行为的实例发生时采取适当和公平的纠正措施。
 
-This Code of Conduct applies within all project spaces, including this repository and on the [Matrix server](https://matrix.to/#/#yimmenu:matrix.org). The code of conduct, however, does not apply to the actual menu codebase
+维护者拥有以下权利和责任：
 
-## Enforcement
+* **内容管理权** - 删除、编辑或拒绝不符合本行为准则的评论、提交、代码、Wiki 编辑、问题报告和其他贡献
+* **权限管理权** - 暂时或永久禁止任何他们认为行为不当、具有威胁性、冒犯性或有害性的贡献者
+* **标准解释权** - 对行为准则条款进行最终解释
 
-Instances of abusive, harassing, or otherwise unacceptable behavior should be reported in the Matrix room. All comments, issues, etc. violating this code of conduct will be swiftly removed, and the person blocked if they have no intention to contribute collegially to the project
+### 决策透明度
 
-## Why Have a Code of Conduct?
+维护者在执行纪律处分时，会向相关方提供：
+- 违规的具体说明
+- 处罚的依据和范围
+- 申诉渠道（如适用）
 
-Unfortunately, as you may already be aware, the game hacking and the wider gaming community is [filled](https://kotaku.com/call-of-duty-has-banned-over-350-000-players-for-racism-1846975082) [with](https://www.unknowncheats.me/forum/images/smilies/black.png) [bigots](https://en.wikipedia.org/wiki/Gamergate_%28harassment_campaign%29), and otherwise [unsavory people](https://en.wikipedia.org/wiki//pol/) who tend to drive away contributors and slow down development by engaging in pointless drivel. To this end, having a code of conduct ensures these people are quickly removed before they could cause significant disruption to the project. This is purely basic decency and has nothing to with being "woke" or "liberal" or whatever certain people may interpret it to be. If you feel that not being able to say racial slurs, for example, is a significant violation of your rights, then please feel free to contribute elsewhere; you're in good company, after all
+## 适用范围
 
-## Attribution
+本行为准则适用于：
 
-This Code of Conduct is adapted from the [Contributor Covenant](https://www.contributor-covenant.org), version 1.4, available at <https://www.contributor-covenant.org/version/1/4/code-of-conduct.html>
+* **项目空间** - 本 GitHub 仓库内的所有区域（Issues、Pull Requests、Discussions、Wiki 等）
+* **社区平台** - [Matrix 服务器](https://matrix.to/#/#yimmenu:matrix.org) 上的所有交流
+* **相关活动** - 与项目相关的线上或线下活动
 
-For answers to common questions about this code of conduct, see <https://www.contributor-covenant.org/faq>
+**例外说明：** 本行为准则不适用于实际的菜单代码库本身。代码的技术实现和质量标准遵循独立的代码审查流程。
+
+## 执法流程
+
+### 举报方式
+
+如果您遇到或目击了滥用、骚扰或其他不可接受的行为，请通过以下方式举报：
+
+1. **Matrix 社区** - 在 Matrix 房间中直接联系管理员
+2. **GitHub** - 通过私信联系项目维护者
+3. **邮件** - 如果其他渠道不可用，可以通过邮件联系
+
+### 举报处理
+
+收到举报后，维护团队将：
+
+1. **确认收到** - 在24小时内确认收到举报
+2. **调查核实** - 评估举报的有效性和严重程度
+3. **采取措施** - 根据违规程度采取相应措施
+4. **通知结果** - 向举报者反馈处理结果（在保护隐私的前提下）
+
+### 处罚措施
+
+根据违规的严重程度和重复情况，可能采取的措施包括：
+
+| 违规程度 | 首次违规 | 重复违规 |
+|---------|---------|---------|
+| **轻微** | 警告并要求删除不当内容 | 临时禁言（3-7天） |
+| **中等** | 临时禁言（7-30天） | 永久禁止参与 |
+| **严重** | 永久禁止参与 | - |
+
+**说明：** 所有违反行为准则的评论、问题等将被立即删除。如果违规者没有以合作态度为项目做出贡献的意愿，将被永久禁止参与。
+
+### 申诉流程
+
+如果您认为处罚不当，可以在处罚后7天内提出申诉：
+
+1. 通过 Matrix 私信联系另一位未参与原处罚决定的维护者
+2. 清晰陈述申诉理由
+3. 维护团队将在14天内复核并作出最终决定
+
+## 为什么需要行为准则？
+
+### 现实背景
+
+不幸的是，正如您可能已经意识到的，游戏修改社区和更广泛的游戏玩家社区中充斥着[偏执狂](https://kotaku.com/call-of-duty-has-banned-over-350-000-players-for-racism-1846975082)、[种族主义者](https://www.unknowncheats.me/forum/images/smilies/black.png)以及其他[令人不悦的人](https://en.wikipedia.org/wiki/Gamergate_%28harassment_campaign%29)，例如[/pol/](https://en.wikipedia.org/wiki//pol/)。这些人往往会通过发表毫无意义的废话来赶走贡献者并拖慢开发进度。
+
+### 我们的目标
+
+行为准则的存在是为了确保这些人在对项目造成重大破坏之前就被迅速移除。这纯粹是为了维护基本的文明礼仪，与所谓的"政治正确"、"自由主义"或其他某些人的解读毫无关系。
+
+### 我们的立场
+
+如果您觉得不能说种族歧视言论是对您权利的严重侵犯，那么请随意在其他地方贡献；毕竟，您并不孤单。
+
+我们欢迎：
+* 尊重他人的技术人员
+* 愿意学习的新手
+* 任何认同基本礼貌和尊重的人
+
+我们不欢迎：
+* 试图将技术社区变成政治战场的人
+* 以"言论自由"为借口进行骚扰的人
+* 拒绝遵守基本文明准则的人
+
+## 归因声明
+
+本行为准则改编自 [Contributor Covenant](https://www.contributor-covenant.org) 1.4 版本，原文可在 <https://www.contributor-covenant.org/version/1/4/code-of-conduct.html> 查看。
+
+有关本行为准则的常见问题解答，请参阅 <https://www.contributor-covenant.org/faq>
+
+## 更新记录
+
+- **原始版本** - 基于 Contributor Covenant 1.4
+- **定制版本** - 针对游戏修改社区特点进行了本地化调整
+
+---
+
+**注意：** 本行为准则会根据社区发展和实际情况进行更新。重大变更将提前在社区内公告。

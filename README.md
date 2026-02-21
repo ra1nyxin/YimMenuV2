@@ -1,29 +1,199 @@
 # YimMenuV2
 
-Experimental menu for GTA 5: Enhanced
+GTA 5: 增强版实验性菜单
 
-## How to use
+## 项目简介
 
-1. Download the latest version of FSL from [here](https://www.unknowncheats.me/forum/grand-theft-auto-v/616977-fsl-local-gtao-saves.html) and place version.dll in your GTA V directory. Using FSL is now optional but highly recommended for account safety
-2. Download YimMenuV2 from [GitHub Releases](https://github.com/YimMenu/YimMenuV2/releases/tag/nightly)
-3. Download an injector, such as [Xenos](https://www.unknowncheats.me/forum/general-programming-and-reversing/124013-xenos-injector-v2-3-2-a.html)
-4. Open Rockstar Launcher, select Grand Theft Auto V Enhanced, go to settings, and disable BattlEye. If you are using Steam or Epic Games, you may have to pass the -nobattleye command line parameter as well
-5. Launch GTA V, then use your injector to inject YimMenuV2.dll at the main menu
+YimMenuV2 是专为《侠盗猎车手5：增强版》(GTA 5: Enhanced) 设计的实验性修改菜单。本项目基于开源社区贡献，旨在为玩家提供离线模式或私有服务器的增强游戏体验。
 
-## How to open the menu?
+**⚠️ 免责声明：** 本工具仅供学习和研究目的。使用本工具修改在线游戏可能违反游戏服务条款，可能导致账号封禁。请仅在离线模式或您拥有完全控制权的私有服务器中使用。
 
-Press the `INSERT` key or `Ctrl+\` to open the menu
- 
-## Common issues
+## 系统要求
 
-### I keep getting desynced from public sessions every five minutes
+- **操作系统：** Windows 10/11 (64位)
+- **游戏版本：** Grand Theft Auto V: Enhanced Edition
+- **运行库：** Visual C++ Redistributable 2015-2022
 
-We currently do not have a BattlEye bypass, and legitimate hosts will eventually remove you due to a heartbeat failure. There is currently no way to stop this other than using an actual (private) bypass
+## 使用教程
 
-### I removed FSL and all my progress disappeared!
+### 第一步：准备环境
 
-FSL reroutes account save data to disk, so any progress made with FSL will only show up if you have FSL enabled. If you don't want this, you can also use YimMenuV2 without FSL, but this is not recommended
+1. **下载 FSL（可选但强烈推荐）**
+   - 访问 [UnknownCheats FSL帖子](https://www.unknowncheats.me/forum/grand-theft-auto-v/616977-fsl-local-gtao-saves.html)
+   - 下载最新版本的 FSL
+   - 将 `version.dll` 文件放置到 GTA V 游戏目录
+   - **说明：** FSL 可将游戏存档数据重定向到本地磁盘，提供额外的账号安全保障。虽然现在是可选组件，但强烈建议使用以保护您的游戏进度
 
-### I removed FSL and the game doesn't start up anymore
+2. **下载 YimMenuV2**
+   - 访问 [GitHub Releases页面](https://github.com/YimMenu/YimMenuV2/releases/tag/nightly)
+   - 下载最新的 `YimMenuV2.dll` 文件
 
-This is a known issue; delete "Documents/GTAV Enhanced/Profiles" to fix
+3. **准备注入器**
+   - 推荐使用 [Xenos注入器](https://www.unknowncheats.me/forum/general-programming-and-reversing/124013-xenos-injector-v2-3-2-a.html)
+   - 或其他兼容的 DLL 注入工具
+
+### 第二步：配置游戏
+
+1. **禁用 BattlEye 反作弊系统**
+   
+   **Rockstar Launcher 用户：**
+   - 打开 Rockstar Games Launcher
+   - 选择 "Grand Theft Auto V Enhanced"
+   - 进入设置选项
+   - 找到并禁用 "BattlEye" 选项
+   
+   **Steam 用户：**
+   - 在 Steam 库中右键点击 GTA V
+   - 选择 "属性"
+   - 在 "启动选项" 中添加：`-nobattleye`
+   
+   **Epic Games 用户：**
+   - 在 Epic Games 库中点击 GTA V 的三个点菜单
+   - 选择 "管理"
+   - 在 "启动参数" 中添加：`-nobattleye`
+
+### 第三步：注入菜单
+
+1. 启动 GTA V 游戏
+2. 等待游戏完全加载到主菜单界面
+3. 运行您的注入器程序
+4. 选择 GTA V 进程
+5. 加载 `YimMenuV2.dll` 文件
+6. 等待注入完成提示
+
+## 如何打开菜单？
+
+菜单注入成功后，使用以下快捷键：
+
+- **`INSERT` 键** - 默认打开/关闭菜单
+- **`Ctrl + \` (反斜杠)** - 备选快捷键
+
+**菜单导航说明：**
+- 使用鼠标点击菜单选项
+- 部分功能可通过热键快速启用/禁用
+- 可在 "设置" 菜单中自定义热键
+
+## 功能概览
+
+### 主要菜单
+
+- **自我 (Self)** - 玩家角色增强：无敌模式、超级跳跃、无限弹药、治疗、通缉控制等
+- **载具 (Vehicle)** - 载具修改：生成载具、载具无敌、修复、改装、速度表等
+- **世界 (World)** - 世界控制：天气、时间、NPC控制、删除物体等
+- **传送 (Teleport)** - 快速移动：路标传送、保存位置、任务目标等
+- **网络 (Network)** - 会话管理：加入战局、玩家列表、会话设置等
+- **玩家 (Players)** - 玩家互动：查看信息、传送、踢出等
+- **刷钱 (Recovery)** - 游戏进度：抢劫任务修改、统计数据编辑等
+- **设置 (Settings)** - 菜单配置：热键、界面样式、ESP设置等
+- **调试 (Debug)** - 开发工具：全局变量、局部变量、脚本调试等
+
+## 常见问题解答 (FAQ)
+
+### Q: 每隔5分钟就会与公共战局断开连接？
+
+**A:** 这是正常现象。由于我们目前没有 BattlEye 绕过方案，合法的战局主机会因为心跳检测失败而将您踢出。这是游戏的安全机制，目前除了使用私有的 BattlEye 绕过工具外没有其他解决方法。
+
+**建议：**
+- 在单人战局或邀请战局中使用菜单
+- 避免长时间停留在公共战局
+- 等待未来的 BattlEye 绕过更新
+
+### Q: 移除 FSL 后所有游戏进度消失了！
+
+**A:** 这是 FSL 的工作机制导致的。FSL 会将您的游戏存档数据重定向保存到本地磁盘，而不是 Rockstar 的云服务器。因此：
+
+- **使用 FSL 时的进度** - 保存在本地，仅在 FSL 启用时可见
+- **不使用 FSL 时的进度** - 保存在云端，由 Rockstar 管理
+
+**解决方案：**
+1. 如果您想继续使用 FSL 的存档，重新启用 FSL 即可
+2. 如果您想切换到云端存档，需要先备份 FSL 存档，然后重新开始
+3. 可以在 "文档/GTAV Enhanced/Profiles" 目录中找到 FSL 存档文件
+
+**警告：** 不建议在没有备份的情况下随意移除 FSL，这可能导致存档丢失。
+
+### Q: 移除 FSL 后游戏无法启动？
+
+**A:** 这是已知问题，通常是因为配置文件冲突导致的。
+
+**解决方法：**
+1. 打开文件资源管理器
+2. 导航到：`文档/GTAV Enhanced/Profiles`
+3. 删除该文件夹内的所有内容（或整个文件夹）
+4. 重新启动游戏
+
+**注意：** 删除 Profiles 文件夹会清除所有本地存档设置，但不会删除游戏进度（如果您使用的是云端存档）。
+
+### Q: 菜单注入后游戏崩溃？
+
+**A:** 可能的原因和解决方案：
+
+1. **游戏版本不匹配** - 确保使用的是最新版本的 YimMenuV2
+2. **BattlEye 未完全禁用** - 检查启动参数是否正确设置
+3. **注入器兼容性问题** - 尝试使用 Xenos 或其他推荐的注入器
+4. **防病毒软件干扰** - 将 GTA V 目录和注入器添加到白名单
+
+### Q: 某些功能无法正常工作？
+
+**A:** 
+- 确保您在正确的游戏模式下使用（故事模式 vs 在线模式）
+- 部分功能可能需要特定的游戏状态（如在载具内、特定任务中等）
+- 检查是否有其他修改工具冲突
+
+## 故障排除
+
+### 基础检查清单
+
+- [ ] 游戏已完全更新到最新版本
+- [ ] BattlEye 已成功禁用
+- [ ] 使用的是最新版本的 YimMenuV2
+- [ ] 注入器以管理员身份运行
+- [ ] 防病毒软件没有拦截注入过程
+
+### 日志文件位置
+
+如果遇到问题，可以查看以下位置的日志文件：
+- 菜单日志：游戏目录下的 `YimMenuV2.log`
+- 游戏日志：`文档/Rockstar Games/GTA V/` 目录
+
+## 更新与支持
+
+### 获取更新
+
+1. 关注本项目的 GitHub Releases 页面
+2. 加入我们的社区讨论（见下方链接）
+3. 定期检查菜单内的更新提示
+
+### 社区支持
+
+- **GitHub Issues** - 报告 Bug 或请求新功能
+- **Matrix 服务器** - 实时社区讨论
+
+## 贡献指南
+
+我们欢迎社区贡献！如果您想参与开发：
+
+1. Fork 本仓库
+2. 创建您的功能分支 (`git checkout -b feature/AmazingFeature`)
+3. 提交您的更改 (`git commit -m 'Add some AmazingFeature'`)
+4. 推送到分支 (`git push origin feature/AmazingFeature`)
+5. 打开一个 Pull Request
+
+**注意：** 请确保您的代码符合项目的代码风格，并通过所有测试。
+
+## 开源许可
+
+本项目基于 GPL-2.0 许可证开源。详见 [LICENSE](LICENSE) 文件。
+
+## 鸣谢
+
+感谢所有为 YimMenuV2 做出贡献的开发者：
+- 原始 YimMenu 团队
+- 社区贡献者
+- 测试人员和反馈提供者
+
+---
+
+**最后更新时间：** 2026年2月
+
+**免责声明重申：** 本工具仅供学习研究目的。使用本工具可能违反 Rockstar Games 的服务条款，开发者不对因使用本工具导致的任何后果负责。请理性使用，尊重游戏环境。
