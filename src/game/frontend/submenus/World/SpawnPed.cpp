@@ -30,8 +30,8 @@ namespace YimMenu::Submenus
 
 		menu->AddItem(std::make_unique<ImGuiItem>([] {
 			static char search[64];
-			ImGui::SetNextItemWidth(300.f);
-			ImGui::InputTextWithHint("Name", "Search", search, sizeof(search));
+		ImGui::SetNextItemWidth(300.f);
+			ImGui::InputTextWithHint("名称", "搜索", search, sizeof(search));
 
 			const int visible = std::min(20, static_cast<int>(g_PedModels.size()));
 			const float height = visible * ImGui::GetTextLineHeightWithSpacing();

@@ -46,7 +46,7 @@ namespace YimMenu::Features
 	    "SNOW_HALLOWEEN",
 	};
 
-	static ListCommand _Weather{"weather", "Weather", "Weather to set or force. Note that this is local and cannot be seen by other players", g_WeatherTypes, 0};
+	static ListCommand _Weather{"weather", "天气", "要设置或强制使用的天气。请注意这是本地效果，其他玩家无法看到", g_WeatherTypes, 0};
 
 	class SetWeather : public Command
 	{
@@ -57,7 +57,7 @@ namespace YimMenu::Features
 			MISC::SET_WEATHER_TYPE_PERSIST(g_WeatherCodes[_Weather.GetState()]);
 		}
 	};
-	static SetWeather _SetWeather{"setweather", "Set Weather", "Sets the specifed weather. Note that this effect is local and cannot be seen by other players"};
+	static SetWeather _SetWeather{"setweather", "设置天气", "设置指定的天气。请注意这是本地效果，其他玩家无法看到"};
 
 	class ForceWeather : public LoopedCommand
 	{
@@ -131,5 +131,5 @@ namespace YimMenu::Features
 		}
 	};
 
-	static ForceWeather _ForceWeather{"forceweather", "Force Weather", "Forces the specified weather. Note that this effect is local and cannot be seen by other players"};
+	static ForceWeather _ForceWeather{"forceweather", "强制天气", "强制使用指定的天气。请注意这是本地效果，其他玩家无法看到"};
 }

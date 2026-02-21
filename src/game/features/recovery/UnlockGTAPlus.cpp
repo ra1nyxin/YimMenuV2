@@ -28,5 +28,5 @@ namespace YimMenu::Features
 		}
 	};
 
-	static UnlockGTAPlus _UnlockGTAPlus{"unlockgtaplus", "Unlock GTA+", "Force-unlocks GTA+ content. Use with caution"};
+	static UnlockGTAPlus _UnlockGTAPlus{"unlockgtaplus", "解锁GTA Plus", "强制解锁GTA+内容，请谨慎使用"};
 }

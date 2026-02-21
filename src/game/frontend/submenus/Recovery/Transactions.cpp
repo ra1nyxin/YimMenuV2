@@ -194,7 +194,7 @@ namespace YimMenu::Submenus
 
 					if (!NETSHOPPING::NET_GAMESERVER_BASKET_START(&txn_id, info.m_Category.m_Hash, info.m_Action.m_Hash, 4))
 					{
-						Notifications::Show("Transactions", "Failed to create basket", NotificationType::Error);
+						Notifications::Show("交易记录", "创建购物篮失败", NotificationType::Error);
 						txn_failed = true;
 						NETSHOPPING::NET_GAMESERVER_BASKET_END();
 						return;
@@ -219,8 +219,8 @@ namespace YimMenu::Submenus
 
 						if (!NETSHOPPING::NET_GAMESERVER_BASKET_ADD_ITEM(&scr_item, item.m_Quantity))
 						{
-							Notifications::Show("Transactions",
-							    std::format("Failed to add {} (x{}) to basket", item.m_PrimaryItem.m_Name, item.m_Quantity),
+							Notifications::Show("交易记录",
+							    std::format("添加 {} (x{}) 到购物篮失败", item.m_PrimaryItem.m_Name, item.m_Quantity),
 							    NotificationType::Error);
 							txn_failed = true;
 							NETSHOPPING::NET_GAMESERVER_BASKET_END();
@@ -232,7 +232,7 @@ namespace YimMenu::Submenus
 				{
 					if (!NETSHOPPING::NET_GAMESERVER_BEGIN_SERVICE(&txn_id, info.m_Category.m_Hash, info.m_Service.m_Item.m_Hash, info.m_Action.m_Hash, info.m_Service.m_Price, 4))
 					{
-						Notifications::Show("Transactions", "Failed to create service", NotificationType::Error);
+						Notifications::Show("交易记录", "创建服务失败", NotificationType::Error);
 						txn_failed = true;
 						return;
 					}
@@ -245,7 +245,7 @@ namespace YimMenu::Submenus
 
 				if (!NETSHOPPING::NET_GAMESERVER_CHECKOUT_START(txn_id))
 				{
-					Notifications::Show("Transactions", "Failed to begin checkout", NotificationType::Error);
+					Notifications::Show("交易记录", "开始结账失败", NotificationType::Error);
 					txn_failed = true;
 					return;
 				}
@@ -258,11 +258,11 @@ namespace YimMenu::Submenus
 
 				if (txn->m_Status == 3)
 				{
-					Notifications::Show("Transactions", "Transaction complete", NotificationType::Success);
+					Notifications::Show("交易记录", "交易完成", NotificationType::Success);
 				}
 				else
 				{
-					Notifications::Show("Transactions", "Transaction failed", NotificationType::Error);
+					Notifications::Show("交易记录", "交易失败", NotificationType::Error);
 				}
 			}
 		});
@@ -383,7 +383,7 @@ namespace YimMenu::Submenus
 		if (
 		    required ?
 		        ImGui::InputText(label.data(), item.m_Name, sizeof(item.m_Name)) :
-		        ImGui::InputTextWithHint(label.data(), "Optional", item.m_Name, sizeof(item.m_Name)))
+		        ImGui::InputTextWithHint(label.data(), "可选", item.m_Name, sizeof(item.m_Name)))
 		{
 			item.m_Hash = Joaat(item.m_Name);
 			if (auto cat_item = Pointers.GetCatalogItem(Pointers.NetCatalog, &item.m_Hash))
@@ -403,7 +403,7 @@ namespace YimMenu::Submenus
 
 		if (!item.m_IsValid && !empty)
 		{
-			SetTransactionError("Item not found!");
+			SetTransactionError("未找到物品!");
 			is_valid = false;
 			return false;
 		}
@@ -411,7 +411,7 @@ namespace YimMenu::Submenus
 		// TODO: maybe not check this every tick?
 		if (BANNED_ITEM_HASHES.contains(item.m_Hash))
 		{
-			SetTransactionError("This item has been blocked for your safety");
+			SetTransactionError("此物品已被阻止以保护您的安全");
 			is_valid = false;
 			return false;
 		}

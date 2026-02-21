@@ -86,5 +86,5 @@ namespace YimMenu::Features
 		}
 	};
 
-	static ClaimSafeEarnings _ClaimSafeEarnings{"claimsafeearnings", "Claim Safe Earnings", "Claims your safe earnings from the selected business."};
+	static ClaimSafeEarnings _ClaimSafeEarnings{"claimsafeearnings", "领取保险箱收益", "从选定的产业领取保险箱收益"};
 }

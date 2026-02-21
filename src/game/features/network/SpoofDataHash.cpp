@@ -29,7 +29,7 @@ namespace YimMenu::Features
 			}
 		}
 	};
-	static DumpDataHash _DumpDataHash{"dumpdatahash", "Dump Data Hash", "Dumps the current data hash into the console"};
+	static DumpDataHash _DumpDataHash{"dumpdatahash", "转储数据哈希", "将当前数据哈希转储到控制台"};
 
 	static void PackOrderHook(rage::scrNativeCallContext* ctx);
 	class SpoofDataHash : public BoolCommand
@@ -80,7 +80,7 @@ namespace YimMenu::Features
 		}
 	};
 
-	static SpoofDataHash _SpoofDataHash{"spoofdatahash", "Spoof Data Hash", "Allows you to join players with rpf mods (or a half installed game)."};
+	static SpoofDataHash _SpoofDataHash{"spoofdatahash", "伪装数据哈希", "允许你加入使用RPF模组（或安装了一半的游戏）的玩家"};
 
 	static void PackOrderHook(rage::scrNativeCallContext* ctx)
 	{

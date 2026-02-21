@@ -16,7 +16,7 @@ namespace YimMenu::Features
 	    {8, "Unknown"},
 	};
 
-	static ListCommand _SpoofedRegion{"mmregion", "Matchmaking Region", "Matchmaking region to spoof to", g_RegionCodes, 0};
+	static ListCommand _SpoofedRegion{"mmregion", "匹配区域", "要伪装到的匹配区域", g_RegionCodes, 0};
 
 	class SpoofMatchmakingRegion : public LoopedCommand
 	{
@@ -40,5 +40,5 @@ namespace YimMenu::Features
 		}
 	};
 
-	static SpoofMatchmakingRegion _SpoofMatchmakingRegion{"spoofmmregion", "Spoof Matchmaking Region", "Change the region you matchmake in to the specified value"};
+	static SpoofMatchmakingRegion _SpoofMatchmakingRegion{"spoofmmregion", "伪装匹配区域", "将匹配区域更改为指定值"};
 }

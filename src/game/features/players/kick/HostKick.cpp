@@ -13,5 +13,5 @@ namespace YimMenu::Features
 		}
 	};
 
-	static HostKick _HostKick{"HKick", "Host Kick", "Only available as host and the target is unblockable"};
+	static HostKick _HostKick{"HKick", "主机踢出", "仅作为主机可用，目标无法阻挡"};
 }

@@ -14,10 +14,10 @@ namespace YimMenu::Features
 {
 	namespace CayoPericoHeist
 	{
-		static IntCommand _CayoPericoHeistCut1{"cayopericoheistcut1", "Player 1", "Player 1 cut", std::nullopt, std::nullopt, 0};
-		static IntCommand _CayoPericoHeistCut2{"cayopericoheistcut2", "Player 2", "Player 2 cut", std::nullopt, std::nullopt, 0};
-		static IntCommand _CayoPericoHeistCut3{"cayopericoheistcut3", "Player 3", "Player 3 cut", std::nullopt, std::nullopt, 0};
-		static IntCommand _CayoPericoHeistCut4{"cayopericoheistcut4", "Player 4", "Player 4 cut", std::nullopt, std::nullopt, 0};
+		static IntCommand _CayoPericoHeistCut1{"cayopericoheistcut1", "玩家1", "玩家1分红", std::nullopt, std::nullopt, 0};
+		static IntCommand _CayoPericoHeistCut2{"cayopericoheistcut2", "玩家2", "玩家2分红", std::nullopt, std::nullopt, 0};
+		static IntCommand _CayoPericoHeistCut3{"cayopericoheistcut3", "玩家3", "玩家3分红", std::nullopt, std::nullopt, 0};
+		static IntCommand _CayoPericoHeistCut4{"cayopericoheistcut4", "玩家4", "玩家4分红", std::nullopt, std::nullopt, 0};
 
 		class SetCuts : public Command
 		{
@@ -50,29 +50,29 @@ namespace YimMenu::Features
 		};
 
 		static std::vector<std::pair<int, const char*>> cayoPericoHeistDifficulty = {
-			{126823, "Normal"},
-			{131055, "Hard"}
+			{126823, "普通"},
+			{131055, "困难"}
 		};
-		static ListCommand _CayoPericoHeistDifficulty{"cayopericoheistdifficulty", "Difficulty", "Heist difficulty", cayoPericoHeistDifficulty, 126823};
+		static ListCommand _CayoPericoHeistDifficulty{"cayopericoheistdifficulty", "难度", "抢劫难度", cayoPericoHeistDifficulty, 126823};
 
 		static std::vector<std::pair<int, const char*>> cayoPericoHeistPrimaryTarget = {
-			{5, "Panther Statue"},
-			{3, "Pink Diamond"},
-			{4, "Madrazo Files"},
-			{2, "Bearer Bonds"},
-			{1, "Ruby Necklace"},
-			{0, "Sinsimito Tequila"}
+			{5, "黑豹雕像"},
+			{3, "粉红钻石"},
+			{4, "玛德拉索文件"},
+			{2, "不记名债券"},
+			{1, "红宝石项链"},
+			{0, "辛西米托龙舌兰"}
 		};
-		static ListCommand _CayoPericoHeistPrimaryTarget{"cayopericoheistprimarytarget", "Primary Target", "Primary target", cayoPericoHeistPrimaryTarget, 5};
+		static ListCommand _CayoPericoHeistPrimaryTarget{"cayopericoheistprimarytarget", "主要目标", "主要目标", cayoPericoHeistPrimaryTarget, 5};
 
 		static std::vector<std::pair<int, const char*>> cayoPericoHeistWeapon = {
-			{1, "Aggressor"},
-			{2, "Conspirator"},
-			{3, "Crack Shot"},
-			{4, "Saboteur"},
-			{5, "Marksman"}
+			{1, "侵略型"},
+			{2, "阴谋型"},
+			{3, "神射手"},
+			{4, "破坏者"},
+			{5, "狙击手"}
 		};
-		static ListCommand _CayoPericoHeistWeapon{"cayopericoheistweapon", "Weapon", "Weapon category", cayoPericoHeistWeapon, 1};
+		static ListCommand _CayoPericoHeistWeapon{"cayopericoheistweapon", "武器", "武器类别", cayoPericoHeistWeapon, 1};
 
 		class Setup : public Command
 		{
@@ -127,7 +127,7 @@ namespace YimMenu::Features
 			}
 		};
 
-		static IntCommand _CayoPericoHeistPrimaryTargetValue{"cayopericoheistprimarytargetvalue", "Primary Target Value", "Updates primary target value", std::nullopt, std::nullopt, 0};
+		static IntCommand _CayoPericoHeistPrimaryTargetValue{"cayopericoheistprimarytargetvalue", "主要目标价值", "更新主要目标价值", std::nullopt, std::nullopt, 0};
 
 		class SetPrimaryTargetValue : public Command
 		{
@@ -186,7 +186,7 @@ namespace YimMenu::Features
 			}
 		};
 
-		static IntCommand _CayoPericoHeistSecondaryTakeValue{"cayopericoheistsecondarytakevalue", "Secondary Take Value", "Updates secondary take value", std::nullopt, std::nullopt, 0};
+		static IntCommand _CayoPericoHeistSecondaryTakeValue{"cayopericoheistsecondarytakevalue", "次要目标价值", "更新次要目标价值", std::nullopt, std::nullopt, 0};
 
 		class SetSecondaryTakeValue : public Command
 		{
@@ -293,15 +293,15 @@ namespace YimMenu::Features
 			}
 		};
 
-		static SetCuts _CayoPericoHeistSetCuts{"cayopericoheistsetcuts", "Set Cuts", "Sets heist cut"};
-		static ForceReady _CayoPericoHeistForceReady{"cayopericoheistforceready", "Force Ready", "Forces all players to be ready"};
-		static Setup _CayoPericoHeistSetup{"cayopericoheistsetup", "Setup", "Sets up cayo perico heist"};
-		static SetPrimaryTargetValue _CayoPericoHeistSetPrimaryTargetValue{"cayopericoheistsetprimarytargetvalue", "Set Primary Target Value", "Updates primary target value"};
-		static SetSecondaryTakeValue _CayoPericoHeistSetSecondaryTakeValue{"cayopericoheistsetsecondarytakevalue", "Set Secondary Take Value", "Updates secondary take value"};
-		static SkipHacking _CayoPericoHeistSkipHacking{"cayopericoheistskiphacking", "Skip Hacking", "Skips hacking process"};
-		static CutSewer _CayoPericoHeistCutSewer{"cayopericoheistcutsewer", "Cut Sewer", "Cuts the sewer"};
-		static CutGlass _CayoPericoHeistCutGlass{"cayopericoheistcutglass", "Cut Glass", "Cuts the glass"};
-		static TakePrimaryTarget _CayoPericoHeistTakePrimaryTarget{"cayopericoheisttakeprimarytarget", "Take Primary Target", "Takes primary target"};
-		static InstantFinish _CayoPericoHeistInstantFinish{"cayopericoheistinstantfinish", "Instant Finish", "Instantly passes the heist"};
+		static SetCuts _CayoPericoHeistSetCuts{"cayopericoheistsetcuts", "设置分红", "设置抢劫分红"};
+		static ForceReady _CayoPericoHeistForceReady{"cayopericoheistforceready", "强制准备", "强制所有玩家准备就绪"};
+		static Setup _CayoPericoHeistSetup{"cayopericoheistsetup", "准备", "设置佩里克岛抢劫"};
+		static SetPrimaryTargetValue _CayoPericoHeistSetPrimaryTargetValue{"cayopericoheistsetprimarytargetvalue", "设置主要目标价值", "更新主要目标价值"};
+		static SetSecondaryTakeValue _CayoPericoHeistSetSecondaryTakeValue{"cayopericoheistsetsecondarytakevalue", "设置次要目标价值", "更新次要目标价值"};
+		static SkipHacking _CayoPericoHeistSkipHacking{"cayopericoheistskiphacking", "跳过破解", "跳过破解过程"};
+		static CutSewer _CayoPericoHeistCutSewer{"cayopericoheistcutsewer", "切割下水道", "切割下水道入口"};
+		static CutGlass _CayoPericoHeistCutGlass{"cayopericoheistcutglass", "切割玻璃", "切割玻璃获取目标"};
+		static TakePrimaryTarget _CayoPericoHeistTakePrimaryTarget{"cayopericoheisttakeprimarytarget", "拿取主要目标", "拿取主要目标物品"};
+		static InstantFinish _CayoPericoHeistInstantFinish{"cayopericoheistinstantfinish", "瞬间完成", "立即完成抢劫"};
 	}
 }
