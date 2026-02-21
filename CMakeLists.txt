@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.20.x)
+cmake_minimum_required(VERSION 3.24)
 
 include(cmake/cross-compile.cmake)
 
@@ -14,6 +14,7 @@ include(cmake/luajit.cmake)
 # source
 set(SRC_DIR "${PROJECT_SOURCE_DIR}/src")
 file(GLOB_RECURSE SRC_FILES
+    CONFIGURE_DEPENDS
     "${SRC_DIR}/**.hpp"
     "${SRC_DIR}/**.cpp"    
 )
