@@ -13,5 +13,5 @@ namespace YimMenu::Features
 		}
 	};
 
-	static Bring _Bring{"bring", "Bring", "Brings the player to you"};
+	static Bring _Bring{"bring", "召唤", "将玩家召唤到你身边"};
 }

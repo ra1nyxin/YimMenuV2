@@ -6,7 +6,7 @@
 
 namespace YimMenu::Features
 {
-	static IntCommand _WantedSlider{"wantedslider", "Wanted Slider", "Wanted level to set/freeze", 0, 5, 0};
+	static IntCommand _WantedSlider{"wantedslider", "通缉等级滑块", "要设置/冻结的通缉等级", 0, 5, 0};
 
 	class ClearWanted : public Command
 	{
@@ -56,8 +56,8 @@ namespace YimMenu::Features
 		}
 	};
 
-	static ClearWanted _ClearWanted{"clearwanted", "Clear Wanted", "Clears your wanted level"};
-	static SetWanted _SetWanted{"setwanted", "Set Wanted", "Sets your wanted level to the desired level"};
-	static NeverWanted _NeverWanted{"neverwanted", "Never Wanted", "Never gain a wanted level"};
-	static FreezeWanted _FreezeWanted{"freezewanted", "Freeze Wanted", "Freeze your wanted level to the desired level"};
+	static ClearWanted _ClearWanted{"clearwanted", "清除通缉", "清除你的通缉等级"};
+	static SetWanted _SetWanted{"setwanted", "设置通缉", "将你的通缉等级设置为期望等级"};
+	static NeverWanted _NeverWanted{"neverwanted", "永远不被通缉", "永远不会获得通缉等级"};
+	static FreezeWanted _FreezeWanted{"freezewanted", "冻结通缉", "将你的通缉等级冻结到期望等级"};
 }

@@ -1065,55 +1065,55 @@ namespace YimMenu::Features
 		}
 	};
 
-	static SetAllActivitiesCompleted _SetAllActivitiesCompleted{"setallactivitiescompleted", "Set All Activities Completed", "Switch session to apply the changes."};
-	static ResetAllActivities _ResetAllActivities{"resetallactivities", "Reset All Activities", "Switch session to apply the changes."};
+	static SetAllActivitiesCompleted _SetAllActivitiesCompleted{"setallactivitiescompleted", "设置所有活动已完成", "切换战局以应用更改。"};
+	static ResetAllActivities _ResetAllActivities{"resetallactivities", "重置所有活动", "切换战局以应用更改。"};
 
-	static CompleteAllChallenges _CompleteAllChallenges{"completeallchallenges", "Complete All Challenges", "Completes all the Daily Objectives and the Weekly Challenge."};
+	static CompleteAllChallenges _CompleteAllChallenges{"completeallchallenges", "完成所有挑战", "完成所有每日目标和每周挑战。"};
 
-	static TeleportToHiddenCache _TeleportToHiddenCache{"tptohiddencache", "Teleport to Hidden Cache", "Teleports to the selected Hidden Cache."};
-	static CollectHiddenCache _CollectHiddenCache{"collecthiddencache", "Collect Hidden Cache", "Collects the selected Hidden Cache."};
+	static TeleportToHiddenCache _TeleportToHiddenCache{"tptohiddencache", "传送到隐藏宝箱", "传送到选定的隐藏宝箱。"};
+	static CollectHiddenCache _CollectHiddenCache{"collecthiddencache", "收集隐藏宝箱", "收集选定的隐藏宝箱。"};
 
-	static TeleportToTreasureChest _TeleportToTreasureChest{"tptotreasurechest", "Teleport to Treasure Chest", "Teleports to the selected Treasure Chest."};
-	static CollectTreasureChest _CollectTreasureChest{"collecttreasurechest", "Collect Treasure Chest", "Collects the selected Treasure Chest."};
-	static EnableTreasureChestInLS _EnableTreasureChestInLS{"enabletreasurechestinls", "Enable Treasure Chests in LS", "Enables Treasure Chests in Los Santos, so you don't have to go to Cayo Perico."};
+	static TeleportToTreasureChest _TeleportToTreasureChest{"tptotreasurechest", "传送到宝箱", "传送到选定的宝箱。"};
+	static CollectTreasureChest _CollectTreasureChest{"collecttreasurechest", "收集宝箱", "收集选定的宝箱。"};
+	static EnableTreasureChestInLS _EnableTreasureChestInLS{"enabletreasurechestinls", "在洛圣都启用宝箱", "在洛圣都启用宝箱，这样你就不必去佩里科岛。"};
 
-	static TeleportToShipwrecked _TeleportToShipwrecked{"tptoshipwrecked", "Teleport to Shipwreck", "Teleports to Shipwreck."};
-	static CollectShipwrecked _CollectShipwrecked{"collectshipwrecked", "Collect Shipwreck", "Collects Shipwreck."};
+	static TeleportToShipwrecked _TeleportToShipwrecked{"tptoshipwrecked", "传送到沉船", "传送到沉船。"};
+	static CollectShipwrecked _CollectShipwrecked{"collectshipwrecked", "收集沉船", "收集沉船。"};
 
-	static TeleportToBuriedStash _TeleportToBuriedStash{"tptoburiedstash", "Teleport to Buried Stash", "Teleports to the selected Buried Stash."};
-	static CollectBuriedStash _CollectBuriedStash{"collectburiedstash", "Collect Buried Stash", "Collects the selected Buried Stash."};
-	static EnableBuriedStashInLS _EnableBuriedStashInLS{"enableburiedstashinls", "Enable Buried Stashes in LS", "Enables Buried Stashes in Los Santos, so you don't have to go to Cayo Perico."};
+	static TeleportToBuriedStash _TeleportToBuriedStash{"tptoburiedstash", "传送到埋藏藏品", "传送到选定的埋藏藏品。"};
+	static CollectBuriedStash _CollectBuriedStash{"collectburiedstash", "收集埋藏藏品", "收集选定的埋藏藏品。"};
+	static EnableBuriedStashInLS _EnableBuriedStashInLS{"enableburiedstashinls", "在洛圣都启用埋藏藏品", "在洛圣都启用埋藏藏品，这样你就不必去佩里科岛。"};
 
-	static TeleportToSkydive _TeleportToSkydive{"tptoskydive", "Teleport to Skydive", "Teleports to the selected Skydive."};
-	static CompleteSkydive _CompleteSkydive{"completeskydive", "Complete Skydive", "Completes the selected Skydive."};
+	static TeleportToSkydive _TeleportToSkydive{"tptoskydive", "传送到跳伞点", "传送到选定的跳伞点。"};
+	static CompleteSkydive _CompleteSkydive{"completeskydive", "完成跳伞", "完成选定的跳伞。"};
 
-	static TeleportToTimeTrial _TeleportToTimeTrial{"tptotimetrial", "Teleport to Time Trial", "Teleports to the selected Time Trial."};
-	static BeatTimeTrial _BeatTimeTrial{"beattimetrial", "Beat Time Trial", "Completes the selected Time Trial."};
+	static TeleportToTimeTrial _TeleportToTimeTrial{"tptotimetrial", "传送到时间挑战赛", "传送到选定的时间挑战赛。"};
+	static BeatTimeTrial _BeatTimeTrial{"beattimetrial", "完成时间挑战赛", "完成选定的时间挑战赛。"};
 
-	static TeleportToExoticExportsVehicle _TeleportToExoticExportsVehicle{"tptoexoticexportsvehicle", "Teleport to Exotic Exports Vehicle", "Teleports to the next Exotic Exports vehicle."};
-	static DeliverNextExoticExportsVehicle _DeliverNextExoticExportsVehicle{"delivernextexoticexportsvehicle", "Deliver Next Exotic Exports Vehicle", "Directly delivers the next Exotic Exports vehicle."};
+	static TeleportToExoticExportsVehicle _TeleportToExoticExportsVehicle{"tptoexoticexportsvehicle", "传送到进口载具", "传送到下一个进口载具。"};
+	static DeliverNextExoticExportsVehicle _DeliverNextExoticExportsVehicle{"delivernextexoticexportsvehicle", "交付下一个进口载具", "直接交付下一个进口载具。"};
 
-	static TeleportToDeadDrop _TeleportToDeadDrop{"tptodeaddrop", "Teleport to G's Cache", "Teleports to G's Cache."};
-	static CollectDeadDrop _CollectDeadDrop{"collectdeaddrop", "Collect G's Cache", "Collects G's Cache."};
+	static TeleportToDeadDrop _TeleportToDeadDrop{"tptodeaddrop", "传送到G的缓存", "传送到G的缓存。"};
+	static CollectDeadDrop _CollectDeadDrop{"collectdeaddrop", "收集G的缓存", "收集G的缓存。"};
 
-	static TeleportToStashHouse _TeleportToStashHouse{"tptostashhouse", "Teleport to Stash House", "Teleports to Stash House."};
-	static EnterStashHouseSafeCode _EnterStashHouseSafeCode{"enterstashhousesafecode", "Enter Stash House Safe Code", "Enters the Stash House safe code."};
+	static TeleportToStashHouse _TeleportToStashHouse{"tptostashhouse", "传送到藏匿处", "传送到藏匿处。"};
+	static EnterStashHouseSafeCode _EnterStashHouseSafeCode{"enterstashhousesafecode", "输入藏匿处保险箱密码", "输入藏匿处保险箱密码。"};
 
-	static TeleportToStreetDealer _TeleportToStreetDealer{"tptostreetdealer", "Teleport to Dealer", "Teleports to the selected Street Dealer."};
-	static _OpenStreetDealerMenu __OpenStreetDealerMenu{"openstreetdealermenu", "Open Street Dealer Menu", "Allows you to access the selected Street Dealer remotely."};
+	static TeleportToStreetDealer _TeleportToStreetDealer{"tptostreetdealer", "传送到街头毒贩", "传送到选定的街头毒贩。"};
+	static _OpenStreetDealerMenu __OpenStreetDealerMenu{"openstreetdealermenu", "打开街头毒贩菜单", "允许你远程访问选定的街头毒贩。"};
 
-	static TeleportToLSTag _TeleportToLSTag{"tptolstag", "Teleport to LS Tag", "Teleports to the selected LS Tag."};
-	static SprayLSTag _SprayLSTag{"spraylstag", "Spray LS Tag", "Sprays the selected LS Tag."};
+	static TeleportToLSTag _TeleportToLSTag{"tptolstag", "传送到洛圣都涂鸦", "传送到选定的洛圣都涂鸦。"};
+	static SprayLSTag _SprayLSTag{"spraylstag", "喷涂洛圣都涂鸦", "喷涂选定的洛圣都涂鸦。"};
 
-	static TeleportToMadrazoHit _TeleportToMadrazoHit{"tptomadrazohit", "Teleport to Madrazo Hit", "Teleports to Madrazo Hit."};
-	static TeleportToMadrazoHitTarget _TeleportToMadrazoHitTarget{"tptomadrazohittarget", "Teleport to Madrazo Hit Target", "Teleports to Madrazo Hit Target."};
+	static TeleportToMadrazoHit _TeleportToMadrazoHit{"tptomadrazohit", "传送到玛德拉索任务", "传送到玛德拉索任务。"};
+	static TeleportToMadrazoHitTarget _TeleportToMadrazoHitTarget{"tptomadrazohittarget", "传送到玛德拉索任务目标", "传送到玛德拉索任务目标。"};
 
-	static SpawnAnimal _SpawnAnimal{"spawnanimal", "Spawn Animal", "Spawns the selected animal."};
-	static PhotographAnimal _PhotographAnimal{"photographanimal", "Photograph Animal", "Photographs the selected animal."};
+	static SpawnAnimal _SpawnAnimal{"spawnanimal", "生成动物", "生成选定的动物。"};
+	static PhotographAnimal _PhotographAnimal{"photographanimal", "拍摄动物", "拍摄选定的动物。"};
 
-	static TeleportToProduct _TeleportToProduct{"tptoproduct", "Teleport to Product", "Teleports to the selected product."};
-	static CollectProduct _CollectProduct{"collectproduct", "Collect Product", "Collects the selected product."};
+	static TeleportToProduct _TeleportToProduct{"tptoproduct", "传送到产品", "传送到选定的产品。"};
+	static CollectProduct _CollectProduct{"collectproduct", "收集产品", "收集选定的产品。"};
 
-	static TeleportToGoldenClover _TeleportToGoldenClover{"tptogoldenclover", "Teleport to Golden Clover", "Teleports to the Golden Clover."};
-	static CollectGoldenClover _CollectGoldenClover{"collectgoldenclover", "Collect Golden Clover", "Collects the Golden Clover."};
+	static TeleportToGoldenClover _TeleportToGoldenClover{"tptogoldenclover", "传送到金色三叶草", "传送到金色三叶草。"};
+	static CollectGoldenClover _CollectGoldenClover{"collectgoldenclover", "收集金色三叶草", "收集金色三叶草。"};
 }

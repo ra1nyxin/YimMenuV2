@@ -13,10 +13,10 @@ namespace YimMenu::Submenus
 {
 	std::shared_ptr<Category> BuildMiscMenu()
 	{
-		auto misc = std::make_unique<Category>("Misc");
+		auto misc = std::make_unique<Category>("杂项");
 
 		misc->AddItem(std::make_unique<ImGuiItem>([] {
-			if (ImGui::Button("Network Bail"))
+			if (ImGui::Button("网络断开"))
 			{
 				FiberPool::Push([] {
 					NETWORK::NETWORK_BAIL(0, 24, 0);

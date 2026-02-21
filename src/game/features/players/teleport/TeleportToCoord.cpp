@@ -16,5 +16,5 @@ namespace YimMenu::Features
 		}
 	};
 
-	static TeleportToCoord _TeleportToCoord{"tpplayertocoord", "Teleport Player To Coord", "Teleports the player to the specified coordinates"};
+	static TeleportToCoord _TeleportToCoord{"tpplayertocoord", "传送玩家到坐标", "将玩家传送到指定坐标"};
 }

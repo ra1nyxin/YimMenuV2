@@ -35,5 +35,5 @@ namespace YimMenu::Features
 		}
 	};
 
-	static Spectate _Spectate{"spectate", "Spectate", "Spectates the selected player"};
+	static Spectate _Spectate{"spectate", "观察", "观察选中的玩家"};
 }

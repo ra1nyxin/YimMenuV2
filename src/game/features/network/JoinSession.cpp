@@ -17,7 +17,7 @@ namespace YimMenu::Features
 	    {static_cast<int>(Network::JoinType::SOLO), "Solo"},
 	};
 
-	static ListCommand _JoinType{"joinsessiontype", "Join Session Type", "The session type to join", g_JoinTypes, static_cast<int>(Network::JoinType::JOIN_PUBLIC)};
+	static ListCommand _JoinType{"joinsessiontype", "加入会话类型", "要加入的会话类型", g_JoinTypes, static_cast<int>(Network::JoinType::JOIN_PUBLIC)};
 
 	class JoinSession : public Command
 	{
@@ -28,7 +28,7 @@ namespace YimMenu::Features
 			Network::LaunchJoinType(static_cast<Network::JoinType>(_JoinType.GetState()));
 		}
 	};
-	static JoinSession _JoinSession{"joinsession", "Join Session", "Joins the specified session type"};
+	static JoinSession _JoinSession{"joinsession", "加入会话", "加入指定的会话类型"};
 
 
 }

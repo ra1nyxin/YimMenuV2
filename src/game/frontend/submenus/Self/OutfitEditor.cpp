@@ -87,16 +87,16 @@ namespace YimMenu
 
 	std::shared_ptr<Category> CreateOutfitsMenu()
 	{
-		auto category = std::make_shared<Category>("Outfit Editor");
+		auto category = std::make_shared<Category>("服装编辑器");
 
 		category->AddItem(std::make_shared<ImGuiItem>([] {
 			if (!NativeInvoker::AreHandlersCached())
-				return ImGui::TextDisabled("Natives not cached yet");
+				return ImGui::TextDisabled("Natives 尚未缓存");
 
 			auto ped = Self::GetPed();
 
 			if (!ped)
-				return ImGui::TextDisabled("Player ped not found");
+				return ImGui::TextDisabled("未找到玩家角色");
 
 			// Create two columns layout
 			const float windowWidth = ImGui::GetContentRegionAvail().x;
@@ -110,12 +110,12 @@ namespace YimMenu
 
 			float header_y = ImGui::GetCursorPosY();
 
-			TextUnderlined("Components");
+			TextUnderlined("组件");
 			const struct
 			{
 				const char* name;
 				int slot;
-			} componentSlots[] = {{"Top", 11}, {"Undershirt", 8}, {"Legs", 4}, {"Feet", 6}, {"Accessories", 7}, {"Bags", 5}, {"Mask", 1}, {"Gloves", 3}, {"Decals", 10}, {"Armor", 9}};
+			} componentSlots[] = {{"上衣", 11}, {"内衬", 8}, {"裤子", 4}, {"鞋子", 6}, {"配饰", 7}, {"包袋", 5}, {"面具", 1}, {"手套", 3}, {"贴纸", 10}, {"护甲", 9}};
 
 			bool first_iter = true;
 			for (const auto& component : componentSlots)
@@ -132,7 +132,7 @@ namespace YimMenu
 
 				ImGui::PushItemWidth(inputWidth);
 				if (first_iter)
-					TextUnderlinedAt("Drawable", header_y);
+					TextUnderlinedAt("模型", header_y);
 				if (ImGui::InputInt("##{}drawable", &drawable))
 				{
 					drawable = std::clamp(drawable, 0, GetMaxDrawable(component.slot) - 1);
@@ -140,7 +140,7 @@ namespace YimMenu
 				}
 				ImGui::SameLine();
 				if (first_iter)
-					TextUnderlinedAt("Texture", header_y); // TODO: this heading is slightly misaligned and I'm not sure why (caused by the above SameLine?)
+					TextUnderlinedAt("纹理", header_y);
 				if (ImGui::InputInt("##{}texture", &texture))
 				{
 					texture = std::clamp(texture, 0, GetMaxTexture(component.slot, drawable) - 1);
@@ -154,13 +154,13 @@ namespace YimMenu
 
 			// Props section (Right column)
 			ImGui::NextColumn();
-			TextUnderlined("Props");
+			TextUnderlined("道具");
 
 			const struct
 			{
 				const char* name;
 				int slot;
-			} propSlots[] = {{"Hats", 0}, {"Glasses", 1}, {"Ears", 2}, {"Watches", 6}};
+			} propSlots[] = {{"帽子", 0}, {"眼镜", 1}, {"耳饰", 2}, {"手表", 6}};
 
 			first_iter = true;
 			for (const auto& prop : propSlots)
@@ -177,7 +177,7 @@ namespace YimMenu
 
 				ImGui::PushItemWidth(inputWidth);
 				if (first_iter)
-					TextUnderlinedAt("Drawable", header_y);
+					TextUnderlinedAt("模型", header_y);
 				if (ImGui::InputInt("##pdrawable", &drawable))
 				{
 					drawable = std::clamp(drawable, 0, GetMaxPropDrawable(prop.slot) - 1);
@@ -185,7 +185,7 @@ namespace YimMenu
 				}
 				ImGui::SameLine();
 				if (first_iter)
-					TextUnderlinedAt("Texture", header_y);
+					TextUnderlinedAt("纹理", header_y);
 				if (ImGui::InputInt("##ptexture", &texture))
 				{
 					texture = std::clamp(texture, 0, GetMaxPropTexture(prop.slot, drawable) - 1);
@@ -199,7 +199,7 @@ namespace YimMenu
 
 			ImGui::Columns(1);
 
-			if (ImGui::Button("Randomize Outfit"))
+			if (ImGui::Button("随机服装"))
 			{
 				std::random_device rd;
 				std::mt19937 gen(rd());

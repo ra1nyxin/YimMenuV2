@@ -6,7 +6,7 @@
 
 namespace YimMenu::Features
 {
-	static StringCommand _PedModelName{"pedmodelname", "Ped Model", "The model name of the ped you wish to spawn."};
+	static StringCommand _PedModelName{"pedmodelname", "NPC模型", "你想要生成的NPC的模型名称。"};
 	static StringCommand _ObjectModelName{"objectmodelname", "Object Model", "The model name of the object you wish to spawn."};
 
 
@@ -60,6 +60,6 @@ namespace YimMenu::Features
 		}
 	};
 
-	static SpawnPed _SpawnPed{"spawnped", "Spawn Ped", "Spawns a ped at your current location."};
-	static SpawnObject _SpawnObject{"spawnobject", "Spawn Object", "Spawns an object at your current location."};
+static SpawnPed _SpawnPed{"spawnped", "生成NPC", "在你当前位置生成一个NPC。"};
+	static SpawnObject _SpawnObject{"spawnobject", "生成物体", "在你当前位置生成一个物体。"};
 }

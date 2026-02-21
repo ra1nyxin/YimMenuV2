@@ -16,5 +16,5 @@ namespace YimMenu::Features
 		}
 	};
 
-	static KeepPlayerClean _KeepPlayerClean{"keepplayerclean", "Keep Player Clean", "Keeps the player clean from any blood, dirt, water."};
+	static KeepPlayerClean _KeepPlayerClean{"keepplayerclean", "保持玩家清洁", "保持玩家身上没有血迹、泥土和水渍"};
 }

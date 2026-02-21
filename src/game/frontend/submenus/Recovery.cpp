@@ -9,15 +9,15 @@ namespace YimMenu::Submenus
 {
 	Recovery::Recovery() :
 		#define ICON_FA_SACK_DOLLAR "\xef\x93\x80"
-	    Submenu::Submenu("Recovery", ICON_FA_SACK_DOLLAR)
+	    Submenu::Submenu("刷钱", ICON_FA_SACK_DOLLAR)
 	{
-		auto main = std::make_shared<Category>("Main");
-		auto businesses = std::make_shared<Category>("Businesses");
-		auto casino = std::make_shared<Category>("Casino");
+		auto main = std::make_shared<Category>("主要");
+		auto businesses = std::make_shared<Category>("产业");
+		auto casino = std::make_shared<Category>("赌场");
 
-		auto generalGroup = std::make_shared<Group>("General");
-		auto businessGroup = std::make_shared<Group>("General");
-		auto casinoSlots = std::make_shared<Group>("Slot Machines");
+		auto generalGroup = std::make_shared<Group>("通用");
+		auto businessGroup = std::make_shared<Group>("通用");
+		auto casinoSlots = std::make_shared<Group>("老虎机");
 		//auto casinoWheel = std::make_shared<Group>("Lucky Wheel");
 		//auto casinoBlackJack = std::make_shared<Group>("Blackjack");
 		//auto casinoRoulette = std::make_shared<Group>("Roulette");

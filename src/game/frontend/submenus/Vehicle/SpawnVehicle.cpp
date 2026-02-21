@@ -10,17 +10,17 @@
 
 namespace YimMenu::Submenus
 {
-	static BoolCommand spawnInsideVehicle{"spawninsideveh", "Spawn Inside", "Spawn inside the vehicle."};
-	static BoolCommand spawnVehicleMaxed{"spawnvehmaxed", "Spawn Maxed", "Spawn the vehicle maxed."};
-	static BoolCommand spawnInsidePersonalVehicle{"spawninsidepv", "Spawn Inside", "Spawn inside the personal vehicle."};
-	static BoolCommand spawnClonePersonalVehicle{"spawnclonepv", "Spawn Clone", "Spawn a clone of the persone vehicle."};
+	static BoolCommand spawnInsideVehicle{"spawninsideveh", "车内生成", "在载具内部生成。"};
+	static BoolCommand spawnVehicleMaxed{"spawnvehmaxed", "满改生成", "生成满改装的载具。"};
+	static BoolCommand spawnInsidePersonalVehicle{"spawninsidepv", "车内生成", "在个人载具内部生成。"};
+	static BoolCommand spawnClonePersonalVehicle{"spawnclonepv", "生成克隆", "生成个人载具的克隆。"};
 
 	std::shared_ptr<TabItem> RenderSpawnNewVehicle()
 	{
-		auto tab = std::make_shared<TabItem>("New Vehicle");
+		auto tab = std::make_shared<TabItem>("新载具");
 
-		auto spawn = std::make_shared<Group>("Spawn");
-		auto settings = std::make_shared<Group>("Settings");
+		auto spawn = std::make_shared<Group>("生成");
+		auto settings = std::make_shared<Group>("设置");
 
 		static std::vector<std::string> vehicleNames{};
 		static std::vector<int> vehicleClasses{};
@@ -62,12 +62,12 @@ namespace YimMenu::Submenus
 
 			static char search[64];
 			ImGui::SetNextItemWidth(300.f);
-			ImGui::InputTextWithHint("Name", "Search", search, sizeof(search));
+			ImGui::InputTextWithHint("名称", "搜索", search, sizeof(search));
 
 			ImGui::SetNextItemWidth(300.f);
-			if (ImGui::BeginCombo("Class", selectedClass == -1 ? "All" : g_VehicleClassNames[selectedClass]))
+			if (ImGui::BeginCombo("分类", selectedClass == -1 ? "全部" : g_VehicleClassNames[selectedClass]))
 			{
-				if (ImGui::Selectable("All", selectedClass == -1))
+				if (ImGui::Selectable("全部", selectedClass == -1))
 				{
 					selectedClass = -1;
 				}
@@ -89,7 +89,7 @@ namespace YimMenu::Submenus
 			{
 				if (vehicleNames.empty())
 				{
-					ImGui::Text("Natives not cached yet.");
+					ImGui::Text("原生函数尚未缓存。");
 				}
 				else
 				{
@@ -138,27 +138,27 @@ namespace YimMenu::Submenus
 
 	std::shared_ptr<TabItem> RenderSpawnPersonalVehicle()
 	{
-		auto tab = std::make_shared<TabItem>("Personal Vehicle");
+		auto tab = std::make_shared<TabItem>("个人载具");
 
-		auto spawn = std::make_shared<Group>("Spawn");
-		auto settings = std::make_shared<Group>("Settings");
+		auto spawn = std::make_shared<Group>("生成");
+		auto settings = std::make_shared<Group>("设置");
 
 		static std::string selectedGarageStr{""};
 
 		spawn->AddItem(std::make_unique<ImGuiItem>([] {
 			if (!*Pointers.IsSessionStarted)
-				return ImGui::TextDisabled("Join GTA Online.");
+				return ImGui::TextDisabled("请加入GTA在线模式。");
 
 			PersonalVehicles::Update();
 
 			static char search[64];
 			ImGui::SetNextItemWidth(300.f);
-			ImGui::InputTextWithHint("Name", "Search", search, sizeof(search));
+			ImGui::InputTextWithHint("名称", "搜索", search, sizeof(search));
 
 			ImGui::SetNextItemWidth(300.f);
-			if (ImGui::BeginCombo("Garage", selectedGarageStr.empty() ? "All" : selectedGarageStr.c_str()))
+			if (ImGui::BeginCombo("车库", selectedGarageStr.empty() ? "全部" : selectedGarageStr.c_str()))
 			{
-				if (ImGui::Selectable("All", selectedGarageStr.empty()))
+				if (ImGui::Selectable("全部", selectedGarageStr.empty()))
 				{
 					selectedGarageStr.clear();
 				}
@@ -179,7 +179,7 @@ namespace YimMenu::Submenus
 			{
 				if (PersonalVehicles::GetPersonalVehicles().empty())
 				{
-					ImGui::Text("Stats not loaded yet.");
+					ImGui::Text("统计数据尚未加载。");
 				}
 				else
 				{
@@ -213,7 +213,7 @@ namespace YimMenu::Submenus
 									else
 									{
 										if (!personalVeh->Request(spawnInsidePersonalVehicle.GetState()))
-											Notifications::Show("Spawn Personal Vehicle", "Failed to spawn Personal Vehicle.", NotificationType::Error);
+											Notifications::Show("生成个人载具", "生成个人载具失败。", NotificationType::Error);
 									}
 								});
 							}
@@ -237,9 +237,9 @@ namespace YimMenu::Submenus
 
 	std::shared_ptr<Category> BuildSpawnVehicleMenu()
 	{
-		auto menu = std::make_shared<Category>("Spawn");
+		auto menu = std::make_shared<Category>("生成");
 
-		auto tabBar = std::make_shared<TabBarItem>("Spawn");
+		auto tabBar = std::make_shared<TabBarItem>("生成");
 
 		tabBar->AddItem(RenderSpawnNewVehicle());
 		tabBar->AddItem(RenderSpawnPersonalVehicle());

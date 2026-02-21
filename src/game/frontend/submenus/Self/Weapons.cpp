@@ -93,7 +93,7 @@ namespace YimMenu::Submenus
 			return true;
 		}();
 
-		ImGui::BeginCombo("Weapons", selectedWeapon.c_str());
+		ImGui::BeginCombo("武器", selectedWeapon.c_str());
 		if (ImGui::IsItemActive() && !ImGui::IsPopupOpen("##weaponspopup"))
 		{
 			ImGui::OpenPopup("##weaponspopup");
@@ -101,7 +101,7 @@ namespace YimMenu::Submenus
 		}
 		if (ImGui::BeginPopup("##weaponspopup", ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove))
 		{
-			ImGui::Text("Search:");
+			ImGui::Text("搜索:");
 			ImGui::SameLine();
 			ImGui::SetNextItemWidth(250.f);
 			ImGui::InputText("##searchweapon", searchWeapon, sizeof(searchWeapon));
@@ -141,14 +141,14 @@ namespace YimMenu::Submenus
 			ImGui::EndPopup();
 		}
 
-		if (ImGui::Button("Give Weapon"))
+		if (ImGui::Button("给予武器"))
 		{
 			FiberPool::Push([] {
 				Self::GetPed().GiveWeapon(selectedWeaponHash, true);
 			});
 		}
 		ImGui::SameLine();
-		if (ImGui::Button("Remove Weapon"))
+		if (ImGui::Button("移除武器"))
 		{
 			FiberPool::Push([] {
 				Self::GetPed().RemoveWeapon(selectedWeaponHash);
@@ -157,11 +157,11 @@ namespace YimMenu::Submenus
 
 		if (*Pointers.IsSessionStarted && selectedWeaponHash != 0)
 		{
-			ImGui::Text("Kills With: %d", kills);
-			ImGui::Text("Deaths By: %d", deaths);
-			ImGui::Text("K/D Ratio: %.2f", kdRatio);
-			ImGui::Text("Headshots: %d", headshots);
-			ImGui::Text("Accuracy: %d%%", accuracy);
+			ImGui::Text("击杀数: %d", kills);
+			ImGui::Text("死亡数: %d", deaths);
+			ImGui::Text("K/D比率: %.2f", kdRatio);
+			ImGui::Text("爆头数: %d", headshots);
+			ImGui::Text("命中率: %d%%", accuracy);
 		}
 	}
 

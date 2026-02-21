@@ -5,7 +5,7 @@
 
 namespace YimMenu::Features
 {
-	static IntCommand _NetworkTimeHour{"networktimehour", "Hour", "Set hour (0-23)", 0, 23, 12};
+	static IntCommand _NetworkTimeHour{"networktimehour", "小时", "设置小时 (0-23)", 0, 23, 12};
 	static IntCommand _NetworkTimeMinute{"networktimeminute", "Minute", "Set minute (0-59)", 0, 59, 0};
 	static IntCommand _NetworkTimeSecond{"networktimesecond", "Second", "Set second (0-59)", 0, 59, 0};
 
@@ -39,6 +39,6 @@ namespace YimMenu::Features
 		}
 	};
 
-	static SetNetworkTime _SetTime{"setnetworktime", "Set Time", "Sets the current online time"};
-	static FreezeNetworkTime _FreezeTime{"freezenetworktime", "Freeze Time", "Freezes the online clock at the selected time"};
+static SetNetworkTime _SetTime{"setnetworktime", "设置时间", "设置当前在线时间"};
+	static FreezeNetworkTime _FreezeTime{"freezenetworktime", "冻结时间", "在选定的时间冻结在线时钟"};
 }

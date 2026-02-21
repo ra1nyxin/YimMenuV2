@@ -47,7 +47,7 @@ namespace YimMenu::Features
 		}
 	};
 
-	static FormatMoney _FormatMoney{"formatmoney", "Format Money", "Formats HUD money with commas."};
+	static FormatMoney _FormatMoney{"formatmoney", "格式化金钱", "使用逗号格式化HUD金钱显示"};
 
 	static void FormatIntHook(int64_t integer, char* str, size_t strSize, bool insertCommas)
 	{

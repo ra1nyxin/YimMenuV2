@@ -313,22 +313,22 @@ namespace YimMenu::Submenus
 
 	std::shared_ptr<Category> BuildStatEditorMenu()
 	{
-		auto menu = std::make_shared<Category>("Stat Editor");
-		auto normal = std::make_shared<Group>("Regular");
-		auto packed = std::make_shared<Group>("Packed");
-		auto packed_range = std::make_shared<Group>("Packed Range");
-		auto from_clipboard = std::make_shared<Group>("From Clipboard");
+		auto menu = std::make_shared<Category>("数据编辑器");
+		auto normal = std::make_shared<Group>("常规");
+		auto packed = std::make_shared<Group>("压缩");
+		auto packed_range = std::make_shared<Group>("压缩范围");
+		auto from_clipboard = std::make_shared<Group>("从剪贴板");
 
 		normal->AddItem(std::make_unique<ImGuiItem>([] {
 			if (!NativeInvoker::AreHandlersCached())
-				return ImGui::TextDisabled("Natives not cached yet");
+				return ImGui::TextDisabled("Natives尚未缓存");
 
 			static StatInfo current_info;
 			static char stat_buf[48]{};
 			static StatValue value{};
 
 			ImGui::SetNextItemWidth(300.f);
-			if (ImGui::InputText("Name", stat_buf, sizeof(stat_buf)))
+			if (ImGui::InputText("名称", stat_buf, sizeof(stat_buf)))
 			{
 				current_info = GetStatInfo(stat_buf);
 				if (current_info.IsValid())
@@ -336,21 +336,21 @@ namespace YimMenu::Submenus
 			}
 
 			if (!current_info.IsValid())
-				return ImGui::TextDisabled("Stat not found");
+				return ImGui::TextDisabled("未找到数据");
 			else if (current_info.m_Normalized)
 			{
-				ImGui::Text("Normalized name to: %s", current_info.m_Name.data());
+				ImGui::Text("规范化名称为: %s", current_info.m_Name.data());
 			}
 
 			bool can_edit = !current_info.m_Data->IsControlledByNetshop();
 
 			RenderStatEditor(value, current_info.m_Data);
 
-			if (ImGui::Button("Refresh"))
+			if (ImGui::Button("刷新"))
 				ReadStat(value, current_info.m_Data);
 			ImGui::SameLine();
 			ImGui::BeginDisabled(!can_edit);
-			if (ImGui::Button("Write"))
+			if (ImGui::Button("写入"))
 				FiberPool::Push([] {
 					WriteStat(current_info.m_NameHash, value, current_info.m_Data);
 				});
@@ -359,20 +359,20 @@ namespace YimMenu::Submenus
 					WriteStat(current_info.m_NameHash, value, current_info.m_Data);
 				});
 			if (!can_edit && ImGui::IsItemHovered(ImGuiHoveredFlags_AllowWhenDisabled))
-				ImGui::SetTooltip("This stat should not be edited by the client. Right-click to force the write anyway");
+				ImGui::SetTooltip("此数据不应由客户端编辑。右键强制写入");
 			ImGui::EndDisabled();
 		}));
 
 		packed->AddItem(std::make_unique<ImGuiItem>([] {
 			if (!NativeInvoker::AreHandlersCached())
-				return ImGui::TextDisabled("Natives not cached yet");
+				return ImGui::TextDisabled("Natives尚未缓存");
 
 			// TODO: improve packed stat editor
 			static PackedStatInfo current_info{0, false, true};
 			static StatValue value{};
 
 			ImGui::SetNextItemWidth(200.f);
-			if (ImGui::InputInt("Index", &current_info.m_Index))
+			if (ImGui::InputInt("索引", &current_info.m_Index))
 			{
 				current_info = GetPackedStatInfo(current_info.m_Index);
 				if (current_info.IsValid())
@@ -380,14 +380,14 @@ namespace YimMenu::Submenus
 			}
 
 			if (!current_info.IsValid())
-				return ImGui::TextDisabled("Index not valid");
+				return ImGui::TextDisabled("索引无效");
 
 			RenderPackedStatEditor(value, current_info);
 
-			if (ImGui::Button("Refresh##packed"))
+			if (ImGui::Button("刷新##packed"))
 				ReadPackedStat(value, current_info);
 			ImGui::SameLine();
-			if (ImGui::Button("Write##packed"))
+			if (ImGui::Button("写入##packed"))
 				FiberPool::Push([] {
 					WritePackedStat(value, current_info);
 				});
@@ -395,19 +395,19 @@ namespace YimMenu::Submenus
 
 		packed_range->AddItem(std::make_unique<ImGuiItem>([] {
 			if (!NativeInvoker::AreHandlersCached())
-				return ImGui::TextDisabled("Natives not cached yet");
+				return ImGui::TextDisabled("Natives尚未缓存");
 
 			static int start{}, end{}, value{};
 
 			ImGui::SetNextItemWidth(150.f);
-			ImGui::InputInt("Start", &start);
+			ImGui::InputInt("开始", &start);
 			ImGui::SameLine();
 			ImGui::SetNextItemWidth(150.f);
-			ImGui::InputInt("End", &end);
+			ImGui::InputInt("结束", &end);
 			ImGui::SetNextItemWidth(150.f);
-			ImGui::InputScalar("Value##packed_range", ImGuiDataType_U8, &value);
+			ImGui::InputScalar("值##packed_range", ImGuiDataType_U8, &value);
 			ImGui::SameLine();
-			if (ImGui::Button("Write##packed_range"))
+			if (ImGui::Button("写入##packed_range"))
 				FiberPool::Push([] {
 					WritePackedStatRange(start, end, value);
 				});
@@ -415,9 +415,9 @@ namespace YimMenu::Submenus
 
 		from_clipboard->AddItem(std::make_unique<ImGuiItem>([] {
 			if (!NativeInvoker::AreHandlersCached())
-				return ImGui::TextDisabled("Natives not cached yet");
+				return ImGui::TextDisabled("Natives尚未缓存");
 
-			if (ImGui::Button("Load from Clipboard"))
+			if (ImGui::Button("从剪贴板加载"))
 			{
 				auto clip_text = std::string(ImGui::GetClipboardText());
 				FiberPool::Push([clip_text] {

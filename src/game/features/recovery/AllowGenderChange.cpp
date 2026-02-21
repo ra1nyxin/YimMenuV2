@@ -18,5 +18,5 @@ namespace YimMenu::Features
 		}
 	};
 
-	static AllowGenderChange _AllowGenderChange{"allowgenderchange", "Allow Gender Change", "Allows the player to change the character's gender"};
+	static AllowGenderChange _AllowGenderChange{"allowgenderchange", "允许性别变更", "允许玩家改变角色性别"};
 }

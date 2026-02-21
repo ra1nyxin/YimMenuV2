@@ -75,5 +75,5 @@ namespace YimMenu::Features
 		}
 	};
 
-	static SendToInterior _SendToInterior{"sendtointerior", "Send to Interior", "Sends the player to the selected interior"};
+	static SendToInterior _SendToInterior{"sendtointerior", "传送到室内", "将玩家传送到选定的室内"};
 }
