@@ -342,4 +342,6 @@ namespace YimMenu::Submenus
 
 			ImGui::Checkbox("按分钟生效", &applyInMinutes);
 		}));
+
+		return menu;
 	}
