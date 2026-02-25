@@ -48,11 +48,11 @@ auto editor = std::make_unique<Group>("编辑器");
 
 		editor->AddItem(std::make_unique<ImGuiItem>([] {
 			ImGui::SetNextItemWidth(200.f);
-			ImGui::InputText("Script", scriptName, sizeof(scriptName));
+			ImGui::InputText("脚本", scriptName, sizeof(scriptName));
 
 			curThread = Scripts::FindScriptThread(Joaat(scriptName));
 			if (!curThread)
-				return ImGui::TextDisabled("Invalid");
+				return ImGui::TextDisabled("无效");
 
 			DrawSavedVariable(curLocal);
 			DrawSavedVariableEdit(curLocal, curLocal.Read(curThread));
@@ -60,7 +60,7 @@ auto editor = std::make_unique<Group>("编辑器");
 
 		saved->AddItem(std::make_unique<ImGuiItem>([] {
 			if (!curThread)
-				return ImGui::TextDisabled("Invalid");
+				return ImGui::TextDisabled("无效");
 
 			auto scriptIdf = curThread->m_ScriptHash;
 			if (scriptIdf != curLocal.script)
@@ -102,13 +102,13 @@ auto editor = std::make_unique<Group>("编辑器");
 			ImGui::SetNextItemWidth(200.f);
 			ImGui::InputText("##localname", localName, sizeof(localName));
 			ImGui::SameLine();
-			if (ImGui::Button("Save"))
+			if (ImGui::Button("保存"))
 			{
 				curLocal.name = localName;
 				SaveLocal(curLocal);
 			}
 			ImGui::SameLine();
-			if (ImGui::Button("Delete"))
+			if (ImGui::Button("删除"))
 			{
 				curLocal.name = localName;
 				DeleteLocal(curLocal);

@@ -7,8 +7,8 @@
 
 namespace YimMenu::Features
 {
-	BoolCommand _OverlayEnabled("overlay", "Overlay Enabled", "Show an info overlay at the top left corner of the screen");
-	BoolCommand _OverlayShowFPS("overlayfps", "Overlay Show FPS", "Show frame rate in the info overlay");
+	BoolCommand _OverlayEnabled("overlay", "启用覆盖层", "在屏幕左上角显示信息覆盖层");
+	BoolCommand _OverlayShowFPS("overlayfps", "显示 FPS", "在信息覆盖层中显示帧率");
 }
 
 namespace YimMenu

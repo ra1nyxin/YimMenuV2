@@ -443,31 +443,31 @@ namespace YimMenu::Submenus
 			ImGui::PushID(i);
 			if (ShouldSwapItemParams(info.m_Category.m_Hash))
 			{
-				if (EditTransactionItem("Item", info, item.m_SecondaryItem, txn_valid, true, false)) // TODO: validate if this corresponds to the correct non-inventory category
+				if (EditTransactionItem("物品", info, item.m_SecondaryItem, txn_valid, true, false)) // TODO: validate if this corresponds to the correct non-inventory category
 					item.m_Price = item.m_SecondaryItem.m_IntendedPrice;
 				EditTransactionItem("Inventory Slot", info, item.m_PrimaryItem, txn_valid, true, true);
 			}
 			else
 			{
-				if (EditTransactionItem("Item", info, item.m_PrimaryItem, txn_valid, true, true))
+				if (EditTransactionItem("物品", info, item.m_PrimaryItem, txn_valid, true, true))
 					item.m_Price = item.m_PrimaryItem.m_IntendedPrice;
-				EditTransactionItem("Secondary Item", info, item.m_SecondaryItem, txn_valid, false, false); // TODO: is this ever used outside of inventory stuff?
+				EditTransactionItem("次级物品", info, item.m_SecondaryItem, txn_valid, false, false); // TODO: is this ever used outside of inventory stuff?
 			}
 
 			ImGui::SetNextItemWidth(180.0f);
-			if (ImGui::InputScalar("Quantity", ImGuiDataType_U32, &item.m_Quantity))
+			if (ImGui::InputScalar("数量", ImGuiDataType_U32, &item.m_Quantity))
 			{
 				if (item.m_Quantity == 0)
 					item_to_delete = i; // assume the user wants this item gone
 			}
 
 			ImGui::SetNextItemWidth(180.0f);
-			ImGui::InputInt("Price", &item.m_Price);
+			ImGui::InputInt("价格", &item.m_Price);
 
 			ImGui::SetNextItemWidth(180.0f);
-			ImGui::InputInt("Stat Value", &item.m_StatValue); // I'm not actually sure what this does ngl
+			ImGui::InputInt("Stat 值", &item.m_StatValue); // I'm not actually sure what this does ngl
 
-			if (info.m_Basket.m_BasketItems.size() > 1 && ImGui::Button("Delete"))
+			if (info.m_Basket.m_BasketItems.size() > 1 && ImGui::Button("删除"))
 				item_to_delete = i;
 			ImGui::PopID();
 
@@ -478,7 +478,7 @@ namespace YimMenu::Submenus
 		if (item_to_delete.has_value())
 			info.m_Basket.m_BasketItems.erase(std::next(info.m_Basket.m_BasketItems.begin(), *item_to_delete));
 
-		if (ImGui::Button("Add Item"))
+		if (ImGui::Button("添加项目"))
 		{
 			info.m_Basket.m_BasketItems.push_back({});
 		}
@@ -486,15 +486,15 @@ namespace YimMenu::Submenus
 
 	static void RenderServiceEditor(TransactionInfo& info, bool& txn_valid)
 	{
-		if (EditTransactionItem("Item", info, info.m_Service.m_Item, txn_valid))
+		if (EditTransactionItem("物品", info, info.m_Service.m_Item, txn_valid))
 			info.m_Service.m_Price = info.m_Service.m_Item.m_IntendedPrice;
 		if (info.m_Service.m_Item.m_IntendedPrice != 0 || info.m_Action.m_Hash != "NET_SHOP_ACTION_EARN"_J)
 		{
 			ImGui::SetNextItemWidth(180.0f);
-			ImGui::InputInt("Price", &info.m_Service.m_Price);
+			ImGui::InputInt("价格", &info.m_Service.m_Price);
 			if (info.m_Service.m_Price > info.m_Service.m_Item.m_IntendedPrice && info.m_Action.m_Hash == "NET_SHOP_ACTION_EARN"_J)
 			{
-				SetTransactionError(std::format("Item price exceeds maximum allowed ({})", info.m_Service.m_Item.m_IntendedPrice));
+				SetTransactionError(std::format("物品价格超出允许的最大值 ({})", info.m_Service.m_Item.m_IntendedPrice));
 				txn_valid = false;
 			}
 		}
@@ -502,30 +502,30 @@ namespace YimMenu::Submenus
 
 	std::shared_ptr<Category> BuildTransactionsMenu()
 	{
-		auto menu = std::make_shared<Category>("Transactions");
-		auto normal = std::make_shared<Group>("Triggerer");
+		auto menu = std::make_shared<Category>("交易记录");
+		auto normal = std::make_shared<Group>("触发器");
 
 		normal->AddItem(std::make_unique<ImGuiItem>([] {
 			if (!NativeInvoker::AreHandlersCached())
-				return ImGui::TextDisabled("Natives not cached yet");
+				return ImGui::TextDisabled("原生函数尚未缓存");
 
 			if (AnticheatBypass::IsFSLProvidingLocalSaves())
-				return ImGui::TextDisabled("Transactions are not supported with FSL local saves enabled");
+				return ImGui::TextDisabled("启用 FSL 本地存档时不支持交易记录功能");
 
 			if (!NETSHOPPING::NET_GAMESERVER_CATALOG_IS_VALID())
-				return ImGui::TextDisabled("Catalog not loaded yet");
+				return ImGui::TextDisabled("目录尚未加载");
 
-			ImGui::Text("Warning: You are solely responsible for what you do with this tool. If you don't know what you're doing, you'll likely get banned");
+			ImGui::Text("警告：你对使用此工具的一切后果负全责。如果你不清楚自己在做什么，很有可能被封号。");
 
 			static TransactionInfo info{};
 			bool txn_valid{true};
 
 			ImGui::SetNextItemWidth(180.0f);
-			if (ImGui::Combo("Type", reinterpret_cast<int*>(&info.m_Type), "Basket\0Service\0"))
+			if (ImGui::Combo("类型", reinterpret_cast<int*>(&info.m_Type), "购物篮\0服务\0"))
 				OnTransactionTypeChanged(info);
 
 			ImGui::SetNextItemWidth(250.0f);
-			if (ImGui::BeginCombo("Category", info.m_Category.m_Name))
+			if (ImGui::BeginCombo("类别", info.m_Category.m_Name))
 			{
 				for (auto& item : NET_SHOP_CATEGORIES)
 				{
@@ -545,7 +545,7 @@ namespace YimMenu::Submenus
 			}
 
 			ImGui::SetNextItemWidth(250.0f);
-			if (ImGui::BeginCombo("Action", info.m_Action.m_Name))
+			if (ImGui::BeginCombo("操作", info.m_Action.m_Name))
 			{
 				for (auto& item : NET_SHOP_ACTIONS)
 				{
@@ -578,12 +578,12 @@ namespace YimMenu::Submenus
 			ImGui::Separator();
 
 			ImGui::BeginDisabled(!txn_valid);
-			if (ImGui::Button("Trigger"))
+			if (ImGui::Button("执行"))
 				FiberPool::Push([] {
 					ProcessTransaction(info);
 				});
 			if (!txn_valid && ImGui::IsItemHovered(ImGuiHoveredFlags_AllowWhenDisabled))
-				ImGui::SetTooltip("The transaction isn't valid. Ensure that all fields are filled out correctly");
+				ImGui::SetTooltip("当前交易无效。请确保所有字段已正确填写。");
 			ImGui::EndDisabled();
 		}));
 

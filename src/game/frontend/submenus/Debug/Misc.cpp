@@ -24,12 +24,12 @@ namespace YimMenu::Submenus
 			}
 
 			static int interiorIndex = 0;
-			ImGui::InputInt("interiorIndex", &interiorIndex);
+			ImGui::InputInt("室内索引", &interiorIndex);
 
 			static bool enterOwnerInterior = false;
-			ImGui::Checkbox("enterOwnerInterior", &enterOwnerInterior);
+			ImGui::Checkbox("进入房主室内", &enterOwnerInterior);
 
-			if (ImGui::Button("DoTeleport"))
+			if (ImGui::Button("执行传送"))
 			{
 				FiberPool::Push([] {
 					SCRIPT_EVENT_SEND_TO_INTERIOR message;
@@ -48,8 +48,8 @@ namespace YimMenu::Submenus
 			}
 
 			static int team;
-			ImGui::InputInt("Team", &team);
-			if (ImGui::Button("fm_mission_controller DoTeamSwap"))
+			ImGui::InputInt("队伍", &team);
+			if (ImGui::Button("fm_mission_controller 切换队伍"))
 			{
 				FiberPool::Push([] {
 					static ScriptFunction DoTeamSwap("fm_mission_controller"_J, ScriptPointer("DoTeamSwap", "2D 02 04 00 00 38 00 50"));

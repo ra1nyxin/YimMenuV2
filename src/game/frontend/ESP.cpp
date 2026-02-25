@@ -33,37 +33,37 @@ namespace
 namespace YimMenu::Features
 {
 	// Players
-	BoolCommand _ESPDrawPlayers("espdrawplayers", "Draw Players", "Should the ESP draw players?");
-	BoolCommand _ESPDrawDeadPlayers("espdrawdeadplayers", "Draw Dead Players", "Should the ESP draw dead players?");
+	BoolCommand _ESPDrawPlayers("espdrawplayers", "显示玩家", "是否在透视中绘制玩家。");
+	BoolCommand _ESPDrawDeadPlayers("espdrawdeadplayers", "显示死亡玩家", "是否在透视中绘制已死亡玩家。");
 
-	BoolCommand _ESPName("espnameplayers", "Show Player Name", "Should the ESP draw player names?");
-	BoolCommand _ESPDistance("espdistanceplayers", "Show Player Distance", "Should the ESP draw player distance?");
-	BoolCommand _ESPSkeleton("espskeletonplayers", "Show Player Skeleton", "Should the ESP draw player skeletons?");
+	BoolCommand _ESPName("espnameplayers", "显示玩家名称", "是否在透视中绘制玩家名称。");
+	BoolCommand _ESPDistance("espdistanceplayers", "显示玩家距离", "是否在透视中绘制玩家距离。");
+	BoolCommand _ESPSkeleton("espskeletonplayers", "显示玩家骨架", "是否在透视中绘制玩家骨架。");
 
-	ColorCommand _NameColorPlayers("namecolorplayers", "Player Name Color", "Changes the color of the name ESP for players", ImVec4{1.0f, 1.0f, 1.0f, 1.0f});
-	ColorCommand _DistanceColorPlayers("distancecolorplayers", "Player Distance Color", "Changes the color of the distance ESP for players", ImVec4{1.0f, 1.0f, 1.0f, 1.0f});
-	ColorCommand _SkeletonColorPlayers("skeletoncolorplayers", "Player Skeleton Color", "Changes the color of the skeleton ESP for players", ImVec4{1.0f, 1.0f, 1.0f, 1.0f});
+	ColorCommand _NameColorPlayers("namecolorplayers", "玩家名称颜色", "更改玩家名称透视的颜色。", ImVec4{1.0f, 1.0f, 1.0f, 1.0f});
+	ColorCommand _DistanceColorPlayers("distancecolorplayers", "玩家距离颜色", "更改玩家距离透视的颜色。", ImVec4{1.0f, 1.0f, 1.0f, 1.0f});
+	ColorCommand _SkeletonColorPlayers("skeletoncolorplayers", "玩家骨架颜色", "更改玩家骨架透视的颜色。", ImVec4{1.0f, 1.0f, 1.0f, 1.0f});
 
 	// Peds
-	BoolCommand _ESPDrawPeds("espdrawpeds", "Draw Peds", "Should the ESP draw peds?");
-	BoolCommand _ESPDrawDeadPeds("espdrawdeadpeds", "Draw Dead Peds", "Should the ESP draw dead peds?");
+	BoolCommand _ESPDrawPeds("espdrawpeds", "显示 NPC", "是否在透视中绘制 NPC。");
+	BoolCommand _ESPDrawDeadPeds("espdrawdeadpeds", "显示死亡 NPC", "是否在透视中绘制已死亡的 NPC。");
 
-	BoolCommand _ESPModelPeds("espmodelspeds", "Show Ped Model", "Should the ESP draw ped models?");
-	BoolCommand _ESPNetworkInfoPeds("espnetinfopeds", "Show Ped Network Info", "Should the ESP draw network info?");
-	BoolCommand _ESPScriptInfoPeds("espscriptinfopeds", "Show Ped Script Info", "Should the ESP draw script info?");
-	BoolCommand _ESPDistancePeds("espdistancepeds", "Show Ped Distance", "Should the ESP draw distance?");
-	BoolCommand _ESPSkeletonPeds("espskeletonpeds", "Show Ped Skeleton", "Should the ESP draw the skeleton?");
+	BoolCommand _ESPModelPeds("espmodelspeds", "显示 NPC 模型哈希", "是否在透视中显示 NPC 的模型哈希。");
+	BoolCommand _ESPNetworkInfoPeds("espnetinfopeds", "显示 NPC 网络信息", "是否在透视中显示 NPC 的网络信息。");
+	BoolCommand _ESPScriptInfoPeds("espscriptinfopeds", "显示 NPC 脚本信息", "是否在透视中显示 NPC 的脚本信息。");
+	BoolCommand _ESPDistancePeds("espdistancepeds", "显示 NPC 距离", "是否在透视中显示 NPC 距离。");
+	BoolCommand _ESPSkeletonPeds("espskeletonpeds", "显示 NPC 骨架", "是否在透视中绘制 NPC 骨架。");
 
-	ColorCommand _HashColorPeds("hashcolorpeds", "Ped Hash Color", "Changes the color of the hash ESP for peds", ImVec4{1.0f, 1.0f, 1.0f, 1.0f});
-	ColorCommand _SkeletonColorPeds("skeletoncolorpeds", "Ped Skeleton Color", "Changes the color of the skeleton ESP for peds", ImVec4{1.0f, 1.0f, 1.0f, 1.0f});
+	ColorCommand _HashColorPeds("hashcolorpeds", "NPC 哈希颜色", "更改 NPC 哈希透视的颜色。", ImVec4{1.0f, 1.0f, 1.0f, 1.0f});
+	ColorCommand _SkeletonColorPeds("skeletoncolorpeds", "NPC 骨架颜色", "更改 NPC 骨架透视的颜色。", ImVec4{1.0f, 1.0f, 1.0f, 1.0f});
 
 	// Objects
-	BoolCommand _ESPDrawObjects("espdrawobjects", "Draw Special Objects", "Should the ESP draw special objects?");
-	BoolCommand _ESPNetworkInfoObjects("espnetinfoobjects", "Show Object Network Info", "Should the ESP draw network info?");
-	BoolCommand _ESPScriptInfoObjects("espscriptinfoobjects", "Show Object Script Info", "Should the ESP draw script info?");
-	BoolCommand _ESPDistanceObjects("espdistanceobjects", "Show Object Distance", "Should the ESP draw distance?");
+	BoolCommand _ESPDrawObjects("espdrawobjects", "显示特殊物体", "是否在透视中绘制特殊物体。");
+	BoolCommand _ESPNetworkInfoObjects("espnetinfoobjects", "显示物体网络信息", "是否在透视中显示物体的网络信息。");
+	BoolCommand _ESPScriptInfoObjects("espscriptinfoobjects", "显示物体脚本信息", "是否在透视中显示物体的脚本信息。");
+	BoolCommand _ESPDistanceObjects("espdistanceobjects", "显示物体距离", "是否在透视中显示物体距离。");
 
-	ColorCommand _HashColorObjects("hashcolorobjects", "Object Hash Color", "Changes the color of the hash ESP for objects", ImVec4{1.0f, 1.0f, 1.0f, 1.0f});
+	ColorCommand _HashColorObjects("hashcolorobjects", "物体哈希颜色", "更改物体哈希透视的颜色。", ImVec4{1.0f, 1.0f, 1.0f, 1.0f});
 }
 
 namespace YimMenu

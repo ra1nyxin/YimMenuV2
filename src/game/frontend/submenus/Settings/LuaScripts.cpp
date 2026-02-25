@@ -8,7 +8,7 @@ namespace YimMenu::Submenus
 {
 	std::shared_ptr<Category> BuildLuaScriptsMenu()
 	{
-		auto menu = std::make_shared<Category>("Lua Scripts");
+		auto menu = std::make_shared<Category>("Lua 脚本");
 
 		static std::shared_ptr<LuaScript> selectedScript;
 
@@ -35,7 +35,7 @@ namespace YimMenu::Submenus
 
 					if (ImGui::IsItemHovered())
 					{
-						ImGui::SetTooltip("Click to load this script");
+						ImGui::SetTooltip("点击以加载此脚本");
 					}
 				});
 
@@ -59,7 +59,7 @@ namespace YimMenu::Submenus
 				ImGui::Text("%s", selectedScript->GetName().data());
 
 				bool paused = selectedScript->GetLoadState() == LuaScript::LoadState::PAUSED;
-				if (ImGui::Button(paused ? "Resume" : "Pause"))
+				if (ImGui::Button(paused ? "继续" : "暂停"))
 				{
 					if (paused)
 						selectedScript->Resume();
@@ -67,12 +67,12 @@ namespace YimMenu::Submenus
 						selectedScript->Pause();
 				}
 				ImGui::SameLine();
-				if (ImGui::Button("Reload"))
+				if (ImGui::Button("重新加载"))
 				{
 					selectedScript->Reload();
 				}
 				ImGui::SameLine();
-				if (ImGui::Button("Unload"))
+				if (ImGui::Button("卸载"))
 				{
 					selectedScript->Unload();
 				}

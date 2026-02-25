@@ -42,44 +42,44 @@ namespace YimMenu::Features
 
 	BoolCommand _SpoofRegionType{
 	    "mmspoofregiontype",
-	    "Spoof Region Type",
-	    "Spoofs the region type of the session"};
+	    "伪装匹配区域类型",
+	    "伪装当前战局的匹配区域类型"};
 	ListCommand _RegionType{
 	    "mmregiontype",
-	    "Region Type",
-	    "The region to spoof the session to",
+	    "区域类型",
+	    "要将战局伪装成的区域",
 		g_RegionCodes};
 
 	BoolCommand _SpoofLanguage{
 	    "mmspooflanguage",
-	    "Spoof Language",
-	    "Spoofs the session language"};
+	    "伪装语言",
+	    "伪装当前战局的语言"};
 	ListCommand _Language{
 	    "mmlanguage",
-	    "Language",
-	    "The language to spoof the session to",
+	    "语言",
+	    "要将战局伪装成的语言",
 	    g_LanguageTypes};
 
 	BoolCommand _SpoofPlayerCount{
 	    "mmspoofplayercount",
-	    "Spoof Player Count",
-	    "Spoofs the session player count"};
+	    "伪装玩家数量",
+	    "伪装当前战局的玩家数量"};
 	IntCommand _PlayerCount{
 	    "mmplayercount",
-	    "Player Count",
-	    "The player count to spoof the session to",
+	    "玩家数量",
+	    "要将战局伪装成的玩家数量",
 	    1,
 	    32,
 	    25};
 
 	BoolCommand _MultiplexSession{
 	    "mmmultiplexsession",
-	    "Multiplex Session",
-	    "Makes your session much more visible to other players by hosting multiple instances of it. High values may fill your session in seconds. Use at your own risk"};
+	    "多路复用战局",
+	    "通过同时托管该战局的多个实例，让其他玩家更容易匹配到你。数值过高可能在几秒内填满战局，请自担风险。"};
 	IntCommand _MultiplexCount{
 	    "mmmultiplexsessioncount",
-	    "Multiplex Session Count",
-	    "The number of sessions to advertise for matchmaking",
+	    "多路复用数量",
+	    "为匹配广播的战局实例数量",
 	    2,
 	    7,
 	    5};

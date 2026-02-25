@@ -248,7 +248,7 @@ namespace YimMenu::Features
 				return;
 
 			SetAllDailyActivitiesCompleted(true);
-			Notifications::Show("Daily Activities", "Completed all activities, switch session to apply the changes.");
+			Notifications::Show("每日活动", "已完成所有活动，请切换战局以应用更改。");
 		}
 	};
 
@@ -262,7 +262,7 @@ namespace YimMenu::Features
 				return;
 
 			SetAllDailyActivitiesCompleted(false);
-			Notifications::Show("Daily Activities", "Reset all activities, switch session to apply the changes.");
+			Notifications::Show("每日活动", "已重置所有活动，请切换战局以应用更改。");
 		}
 	};
 
@@ -300,7 +300,7 @@ namespace YimMenu::Features
 			}
 			else
 			{
-				Notifications::Show("Hidden Caches", "This Hidden Cache has already been collected.", NotificationType::Error);
+				Notifications::Show("隐藏宝箱", "该隐藏宝箱已被收集。", NotificationType::Error);
 			}
 		}
 	};
@@ -320,7 +320,7 @@ namespace YimMenu::Features
 			}
 			else
 			{
-				Notifications::Show("Hidden Caches", "This Hidden Cache has already been collected.", NotificationType::Error);
+				Notifications::Show("隐藏宝箱", "该隐藏宝箱已被收集。", NotificationType::Error);
 			}
 		}
 	};
@@ -340,7 +340,7 @@ namespace YimMenu::Features
 			}
 			else
 			{
-				Notifications::Show("Treasure Chests", "This Treasure Chest has already been collected.", NotificationType::Error);
+				Notifications::Show("宝箱", "该宝箱已被收集。", NotificationType::Error);
 			}
 		}
 	};
@@ -360,7 +360,7 @@ namespace YimMenu::Features
 			}
 			else
 			{
-				Notifications::Show("Treasure Chests", "This Treasure Chest has already been collected.", NotificationType::Error);
+				Notifications::Show("宝箱", "该宝箱已被收集。", NotificationType::Error);
 			}
 		}
 	};
@@ -404,7 +404,7 @@ namespace YimMenu::Features
 			}
 			else
 			{
-				Notifications::Show("Shipwreck", "Shipwreck has already been collected.", NotificationType::Error);
+				Notifications::Show("沉船", "该沉船已被收集。", NotificationType::Error);
 			}
 		}
 	};
@@ -424,7 +424,7 @@ namespace YimMenu::Features
 			}
 			else
 			{
-				Notifications::Show("Shipwreck", "Shipwreck has already been collected.", NotificationType::Error);
+				Notifications::Show("沉船", "该沉船已被收集。", NotificationType::Error);
 			}
 		}
 	};
@@ -444,7 +444,7 @@ namespace YimMenu::Features
 			}
 			else
 			{
-				Notifications::Show("Buried Stashes", "This Buried Stash has already been collected.", NotificationType::Error);
+				Notifications::Show("埋藏藏品", "该埋藏藏品已被收集。", NotificationType::Error);
 			}
 		}
 	};
@@ -464,7 +464,7 @@ namespace YimMenu::Features
 			}
 			else
 			{
-				Notifications::Show("Buried Stashes", "This Buried Stash has already been collected.", NotificationType::Error);
+				Notifications::Show("埋藏藏品", "该埋藏藏品已被收集。", NotificationType::Error);
 			}
 		}
 	};
@@ -567,7 +567,7 @@ namespace YimMenu::Features
 
 			if (stat.empty() || Stats::GetInt(stat) != -1)
 			{
-				Notifications::Show("Time Trials", "This Time Trial has already been beaten.", NotificationType::Error);
+				Notifications::Show("时间挑战赛", "该时间挑战赛已完成。", NotificationType::Error);
 				return;
 			}
 
@@ -589,7 +589,7 @@ namespace YimMenu::Features
 			}
 			else
 			{
-				Notifications::Show("Time Trials", "Please enable the blip from the Interaction Menu.", NotificationType::Error);
+				Notifications::Show("时间挑战赛", "请从交互菜单中启用相应标记点。", NotificationType::Error);
 			}
 		}
 	};
@@ -613,7 +613,7 @@ namespace YimMenu::Features
 
 			if (stat.empty() || Stats::GetInt(stat) != -1)
 			{
-				Notifications::Show("Time Trials", "This Time Trial has already been beaten.", NotificationType::Error);
+				Notifications::Show("时间挑战赛", "该时间挑战赛已完成。", NotificationType::Error);
 				return;
 			}
 
@@ -678,7 +678,7 @@ namespace YimMenu::Features
 
 			if (GPBD_Flow::Get()->Entries[Self::GetPlayer().GetId()].TunerCBVDeliveredFlags.Value == 1023)
 			{
-				Notifications::Show("Exotic Exports", "You have already delivered all the vehicles.", NotificationType::Error);
+				Notifications::Show("进口载具", "你已经交付了所有载具。", NotificationType::Error);
 				return;
 			}
 
@@ -701,7 +701,7 @@ namespace YimMenu::Features
 
 			if (GPBD_Flow::Get()->Entries[Self::GetPlayer().GetId()].TunerCBVDeliveredFlags.Value == 1023)
 			{
-				Notifications::Show("Exotic Exports", "You have already delivered all the vehicles.", NotificationType::Error);
+				Notifications::Show("进口载具", "你已经交付了所有载具。", NotificationType::Error);
 				return;
 			}
 
@@ -733,7 +733,7 @@ namespace YimMenu::Features
 			}
 			else
 			{
-				Notifications::Show("G's Cache", "G's Cache has already been collected.", NotificationType::Error);
+				Notifications::Show("G 的缓存", "该 G 的缓存已被收集。", NotificationType::Error);
 			}
 		}
 	};
@@ -753,7 +753,7 @@ namespace YimMenu::Features
 			}
 			else
 			{
-				Notifications::Show("G's Cache", "G's Cache has already been collected.", NotificationType::Error);
+				Notifications::Show("G 的缓存", "该 G 的缓存已被收集。", NotificationType::Error);
 			}
 		}
 	};
@@ -778,7 +778,7 @@ namespace YimMenu::Features
 			}
 			else
 			{
-				Notifications::Show("Stash House", "Stash House has already been raided.", NotificationType::Error);
+				Notifications::Show("藏匿处", "该藏匿处已被洗劫。", NotificationType::Error);
 			}
 		}
 	};
@@ -848,7 +848,7 @@ namespace YimMenu::Features
 			}
 			else
 			{
-				Notifications::Show("LS Tags", "This LS Tag has already been sprayed.", NotificationType::Error);
+				Notifications::Show("洛圣都涂鸦", "该洛圣都涂鸦已被喷涂。", NotificationType::Error);
 			}
 		}
 	};
@@ -868,7 +868,7 @@ namespace YimMenu::Features
 			}
 			else
 			{
-				Notifications::Show("LS Tags", "This LS Tag has already been sprayed.", NotificationType::Error);
+				Notifications::Show("洛圣都涂鸦", "该洛圣都涂鸦已被喷涂。", NotificationType::Error);
 			}
 		}
 	};
@@ -884,7 +884,7 @@ namespace YimMenu::Features
 
 			if (Stats::GetInt("MPX_BAIL_OFFICE_OWNED") == 0)
 			{
-				Notifications::Show("Madrazo Hits", "You must own a Bail Office.", NotificationType::Error);
+				Notifications::Show("玛德拉索任务", "你必须先拥有保释事务所。", NotificationType::Error);
 				return;
 			}
 
@@ -899,7 +899,7 @@ namespace YimMenu::Features
 			}
 			else
 			{
-				Notifications::Show("Madrazo Hits", "Madrazo Hit has already been completed.", NotificationType::Error);
+				Notifications::Show("玛德拉索任务", "该玛德拉索任务已完成。", NotificationType::Error);
 			}
 		}
 	};
@@ -942,7 +942,7 @@ namespace YimMenu::Features
 			}
 			else
 			{
-				Notifications::Show("Shoot Animals Photography", "This animal has already been photographed.", NotificationType::Error);
+				Notifications::Show("动物摄影", "该动物已被拍摄。", NotificationType::Error);
 			}
 		}
 	};
@@ -968,7 +968,7 @@ namespace YimMenu::Features
 			}
 			else
 			{
-				Notifications::Show("Shoot Animals Photography", "This animal has already been photographed.", NotificationType::Error);
+				Notifications::Show("动物摄影", "该动物已被拍摄。", NotificationType::Error);
 			}
 		}
 	};
@@ -984,7 +984,7 @@ namespace YimMenu::Features
 
 			if (Stats::GetInt("MPX_SB_WEED_SHOP_OWNED") == 0)
 			{
-				Notifications::Show("Smoke on the Water", "You must own a Smoke on the Water property.", NotificationType::Error);
+				Notifications::Show("水上烟草店", "你必须先拥有水上烟草店物业。", NotificationType::Error);
 				return;
 			}
 
@@ -994,7 +994,7 @@ namespace YimMenu::Features
 			}
 			else
 			{
-				Notifications::Show("Smoke on the Water", "This product has already been collected.", NotificationType::Error);
+				Notifications::Show("水上烟草店", "该产品已被收集。", NotificationType::Error);
 			}
 		}
 	};
@@ -1010,7 +1010,7 @@ namespace YimMenu::Features
 
 			if (Stats::GetInt("MPX_SB_WEED_SHOP_OWNED") == 0)
 			{
-				Notifications::Show("Smoke on the Water", "You must own a Smoke on the Water property.", NotificationType::Error);
+				Notifications::Show("水上烟草店", "你必须先拥有水上烟草店物业。", NotificationType::Error);
 				return;
 			}
 
@@ -1020,7 +1020,7 @@ namespace YimMenu::Features
 			}
 			else
 			{
-				Notifications::Show("Smoke on the Water", "This product has already been collected.", NotificationType::Error);
+				Notifications::Show("水上烟草店", "该产品已被收集。", NotificationType::Error);
 			}
 		}
 	};
@@ -1040,7 +1040,7 @@ namespace YimMenu::Features
 			}
 			else
 			{
-				Notifications::Show("Golden Clover", "Golden Clover has already been collected.", NotificationType::Error);
+				Notifications::Show("金色三叶草", "金色三叶草已被收集。", NotificationType::Error);
 			}
 		}
 	};
@@ -1060,7 +1060,7 @@ namespace YimMenu::Features
 			}
 			else
 			{
-				Notifications::Show("Golden Clover", "Golden Clover has already been collected.", NotificationType::Error);
+				Notifications::Show("金色三叶草", "金色三叶草已被收集。", NotificationType::Error);
 			}
 		}
 	};

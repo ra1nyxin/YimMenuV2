@@ -18,7 +18,7 @@ namespace YimMenu::Features
 		{
 			if (!*Pointers.IsSessionStarted || Scripts::IsScriptActive("AM_CONTACT_REQUESTS"_J))
 			{
-				Notifications::Show("Mechanic", "Not safe to call the mechanic at the moment.", NotificationType::Error);
+				Notifications::Show("技师", "当前无法安全呼叫技师。", NotificationType::Error);
 				return;
 			}
 
@@ -41,11 +41,11 @@ namespace YimMenu::Features
 				}
 				else
 				{
-					Notifications::Show("Mechanic", "Failed to call the mechanic.", NotificationType::Error);
+					Notifications::Show("技师", "呼叫技师失败。", NotificationType::Error);
 				}
 			}
 		}
 	};
 
-	static CallMechanic _CallMechanic{"callmechanic", "Call Mechanic", "Allows you to request your personal vehicles."};
+	static CallMechanic _CallMechanic{"callmechanic", "呼叫技师", "允许你请求你的个人载具。"};
 }

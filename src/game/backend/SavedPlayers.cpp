@@ -12,15 +12,15 @@
 
 namespace YimMenu::Features
 {
-	static BoolCommand _AutoUpdateEnabled{"playerdbautoupdate", "Player Database Auto Update", "Automatically updates tracked player status every 3 minutes. This is required for tracking notifications to work", true};
-	static BoolCommand _PlayerTracking{"playerdbnotify", "Tracking Notifications", "Notifies you when the state of a player you track changes", true};
-	static BoolCommand _NotifyWhenJoinable{"playerdbnotifywhenjoinable", "Notify When Joinable", "Notifies you when a tracked player becomes joinable", true};
-	static BoolCommand _NotifyWhenUnjoinable{"playerdbnotifywhenunjoinable", "Notify When Unjoinable", "Notifies you when a tracked player becomes unjoinable", true};
-	static BoolCommand _NotifyWhenOnline{"playerdbnotifywhenonline", "Notify When Online", "Notifies you when a tracked player goes online", true};
-	static BoolCommand _NotifyWhenOffline{"playerdbnotifywhenoffline", "Notify When Offline", "Notifies you when a tracked player goes offline", true};
-	static BoolCommand _NotifyOnSessionTypeChange{"playerdbnotifyonseschange", "Notify On Session Type Change", "Notifies you when a tracked player's session type changes"};
-	static BoolCommand _NotifyOnMissionChange{"playerdbnotifyonmischange", "Notify On Mission Change", "Notifies you when a tracked player joins or leaves a mission"};
-	static BoolCommand _NotifyOnTransitionChange{"playerdbnotifyonjoblobby", "Notify On Job Lobby Change", "Notifies you when a tracked player joins or leaves a job lobby"};
+	static BoolCommand _AutoUpdateEnabled{"playerdbautoupdate", "玩家数据库自动刷新", "每 3 分钟自动刷新已跟踪玩家状态（跟踪通知需要开启此选项）", true};
+	static BoolCommand _PlayerTracking{"playerdbnotify", "跟踪通知", "当你跟踪的玩家状态发生变化时提示你", true};
+	static BoolCommand _NotifyWhenJoinable{"playerdbnotifywhenjoinable", "可加入时通知", "当跟踪玩家所在战局变为可加入时提示你", true};
+	static BoolCommand _NotifyWhenUnjoinable{"playerdbnotifywhenunjoinable", "不可加入时通知", "当跟踪玩家所在战局变为不可加入时提示你", true};
+	static BoolCommand _NotifyWhenOnline{"playerdbnotifywhenonline", "上线时通知", "当跟踪玩家从离线变为在线时提示你", true};
+	static BoolCommand _NotifyWhenOffline{"playerdbnotifywhenoffline", "离线时通知", "当跟踪玩家从在线变为离线时提示你", true};
+	static BoolCommand _NotifyOnSessionTypeChange{"playerdbnotifyonseschange", "战局类型变化通知", "当跟踪玩家的战局类型发生变化时提示你"};
+	static BoolCommand _NotifyOnMissionChange{"playerdbnotifyonmischange", "任务变化通知", "当跟踪玩家加入或离开任务时提示你"};
+	static BoolCommand _NotifyOnTransitionChange{"playerdbnotifyonjoblobby", "任务大厅变化通知", "当跟踪玩家加入或离开任务大厅时提示你"};
 
 	class UpdateSavedPlayersNow : public Command
 	{
@@ -32,7 +32,7 @@ namespace YimMenu::Features
 		}
 	};
 
-	UpdateSavedPlayersNow _UpdateSavedPlayersNow{"playerdbupdatenow", "Update Saved Players Now", "Force-updates all saved players"};
+	UpdateSavedPlayersNow _UpdateSavedPlayersNow{"playerdbupdatenow", "立即刷新已保存玩家", "强制刷新所有已保存玩家的状态"};
 }
 
 namespace YimMenu
@@ -67,36 +67,36 @@ namespace YimMenu
 
 		if (saved_data.m_FetchedData->m_GameState != FetchedPlayerData::GameState::INVALID && fetched_data.m_GameState == FetchedPlayerData::GameState::INVALID && Features::_NotifyWhenOffline.GetState())
 		{
-			Notifications::Show("Player Tracker", std::format("{} is no longer online", saved_data.m_Name));
+			Notifications::Show("玩家跟踪", std::format("{} 已离线", saved_data.m_Name));
 		}
 		else if (!IsInJoinableSession(saved_data.m_FetchedData->m_GameState) && IsInJoinableSession(fetched_data.m_GameState) && Features::_NotifyWhenJoinable.GetState())
 		{
-			Notifications::Show("Player Tracker", std::format("{} is now in a joinable session", saved_data.m_Name));
+			Notifications::Show("玩家跟踪", std::format("{} 已进入可加入战局", saved_data.m_Name));
 		}
 		else if (saved_data.m_FetchedData->m_GameState == FetchedPlayerData::GameState::INVALID && saved_data.m_FetchedData->m_GameState != FetchedPlayerData::GameState::INVALID && Features::_NotifyWhenOnline.GetState())
 		{
-			Notifications::Show("Player Tracker", std::format("{} is now online", saved_data.m_Name));
+			Notifications::Show("玩家跟踪", std::format("{} 已上线", saved_data.m_Name));
 		}
 		else if (IsInJoinableSession(saved_data.m_FetchedData->m_GameState) && !IsInJoinableSession(fetched_data.m_GameState) && Features::_NotifyWhenUnjoinable.GetState())
 		{
-			Notifications::Show("Player Tracker", std::format("{} is no longer in a joinable session", saved_data.m_Name));
+			Notifications::Show("玩家跟踪", std::format("{} 所在战局已不可加入", saved_data.m_Name));
 		}
 
 		if (IsValidSessionType(saved_data.m_FetchedData->m_GameState) && IsValidSessionType(fetched_data.m_GameState)
 		    && saved_data.m_FetchedData->m_GameState != fetched_data.m_GameState && Features::_NotifyOnSessionTypeChange.GetState())
 		{
-			Notifications::Show("Player Tracker", std::format("{} is now in a {} session", saved_data.m_Name, FetchedPlayerData::GameStateToString(fetched_data.m_GameState)));
+			Notifications::Show("玩家跟踪", std::format("{} 现在位于 {} 战局", saved_data.m_Name, FetchedPlayerData::GameStateToString(fetched_data.m_GameState)));
 		}
 
 		if (Features::_NotifyOnMissionChange.GetState())
 		{
 			if (saved_data.m_FetchedData->m_MissionType != FetchedPlayerData::MissionType::NONE && fetched_data.m_MissionType == FetchedPlayerData::MissionType::NONE)
 			{
-				Notifications::Show("Player Tracker", std::format("{} is no longer in a {}", saved_data.m_Name, FetchedPlayerData::MissionTypeToString(saved_data.m_FetchedData->m_MissionType)));
+				Notifications::Show("玩家跟踪", std::format("{} 不再处于 {}", saved_data.m_Name, FetchedPlayerData::MissionTypeToString(saved_data.m_FetchedData->m_MissionType)));
 			}
 			else if (fetched_data.m_MissionType != FetchedPlayerData::MissionType::NONE && fetched_data.m_MissionType != saved_data.m_FetchedData->m_MissionType)
 			{
-				Notifications::Show("Player Tracker", std::format("{} is now in a {}", saved_data.m_Name, FetchedPlayerData::MissionTypeToString(fetched_data.m_MissionType)));
+				Notifications::Show("玩家跟踪", std::format("{} 现在处于 {}", saved_data.m_Name, FetchedPlayerData::MissionTypeToString(fetched_data.m_MissionType)));
 			}
 		}
 
@@ -106,17 +106,17 @@ namespace YimMenu
 			{
 				if (fetched_data.m_HostOfTransition)
 				{
-					Notifications::Show("Player Tracker", std::format("{} has hosted a job lobby", saved_data.m_Name));
+					Notifications::Show("玩家跟踪", std::format("{} 已创建任务大厅", saved_data.m_Name));
 				}
 				else
 				{
-					Notifications::Show("Player Tracker", std::format("{} has joined a job lobby", saved_data.m_Name));
+					Notifications::Show("玩家跟踪", std::format("{} 已加入任务大厅", saved_data.m_Name));
 				}
 			}
 			else if ((!saved_data.m_FetchedData->m_InTransition && fetched_data.m_InTransition)
 			    && (!Features::_NotifyOnMissionChange.GetState() || (fetched_data.m_MissionType == saved_data.m_FetchedData->m_MissionType)))
 			{
-				Notifications::Show("Player Tracker", std::format("{} is no longer in a job lobby", saved_data.m_Name));
+				Notifications::Show("玩家跟踪", std::format("{} 不再处于任务大厅", saved_data.m_Name));
 			}
 		}
 
