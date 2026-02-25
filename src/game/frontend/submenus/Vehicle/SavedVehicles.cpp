@@ -20,7 +20,7 @@ namespace YimMenu::Submenus
 		static char vehicle_file_name_input[64]{};
 		static char newFolder[50]{};
 
-		auto persistCar = std::make_shared<Category>("Saved Vehicles");
+		auto persistCar = std::make_shared<Category>("已保存载具");
 
 		persistCar->AddItem(std::make_shared<BoolCommandItem>("spawninsidesavedveh"_J));
 
@@ -123,7 +123,7 @@ namespace YimMenu::Submenus
 			ImGui::SameLine();
 			ImGui::BeginGroup();
 			{
-			ImGui::Text("文件名");
+				ImGui::Text("文件名");
 				ImGui::SetNextItemWidth(250);
 				ImGui::InputText("##vehiclefilename", vehicle_file_name_input, IM_ARRAYSIZE(vehicle_file_name_input));
 
