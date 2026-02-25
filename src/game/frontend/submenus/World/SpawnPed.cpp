@@ -15,7 +15,7 @@ namespace YimMenu::Submenus
 {
 	std::shared_ptr<Category> BuildSpawnPedMenu()
 	{
-		auto menu = std::make_shared<Category>("Spawn Ped");
+		auto menu = std::make_shared<Category>("生成行人");
 
 		static bool invincible;
 		static bool spawnDead;
@@ -30,7 +30,7 @@ namespace YimMenu::Submenus
 
 		menu->AddItem(std::make_unique<ImGuiItem>([] {
 			static char search[64];
-		ImGui::SetNextItemWidth(300.f);
+			ImGui::SetNextItemWidth(300.f);
 			ImGui::InputTextWithHint("名称", "搜索", search, sizeof(search));
 
 			const int visible = std::min(20, static_cast<int>(g_PedModels.size()));
@@ -58,12 +58,11 @@ namespace YimMenu::Submenus
 									auto vehicle = Self::GetVehicle();
 									if (vehicle)
 									{
-										if (!vehicle.IsSeatFree(-2) && 
-										    !vehicle.IsSeatFree(-1))
+										if (!vehicle.IsSeatFree(-2) && !vehicle.IsSeatFree(-1))
 										{
 											Notifications::Show(
-											    "Spawn Ped",
-											    "Cannot spawn ped in vehicle, all seats are occupied, please free a seat first or disable 'Spawn In My Vehicle' option.",
+											    "生成行人",
+											    "无法在载具中生成行人，所有座位已被占用，请先释放一个座位或禁用'生成在载具中'选项。",
 											    NotificationType::Warning);
 											return;
 										}
@@ -101,7 +100,7 @@ namespace YimMenu::Submenus
 									handle.SetCombatAttribute(PedCombatAttribute::CanDoDrivebys, true);
 									handle.SetCombatAttribute(PedCombatAttribute::CanThrowSmokeGrenade, true);
 									handle.SetCombatAttribute(PedCombatAttribute::CanSeeUnderwaterPeds, true);
-									
+
 									auto group = Self::GetPlayer().GetGroup();
 									handle.AddToGroup(group);
 									PED::SET_GROUP_SEPARATION_RANGE(group, 9999.9f);
@@ -117,7 +116,8 @@ namespace YimMenu::Submenus
 								if (spawnInMyVehicle)
 								{
 									auto vehicle = Self::GetVehicle();
-									if (vehicle) {
+									if (vehicle)
+									{
 										if (vehicle.IsSeatFree(-1))
 											handle.SetInVehicle(vehicle, -1);
 										else
@@ -153,8 +153,7 @@ namespace YimMenu::Submenus
 
 								if (set_player)
 								{
-									static auto hooked = []()
-									{
+									static auto hooked = []() {
 										NativeHooks::AddHook("freemode"_J, NativeIndex::GET_ENTITY_MODEL, [](rage::scrNativeCallContext* ctx) {
 											auto model = ENTITY::GET_ENTITY_MODEL(ctx->GetArg<int>(0));
 
@@ -176,7 +175,7 @@ namespace YimMenu::Submenus
 												}
 
 												return ctx->SetReturnValue(model);
-											}); 
+											});
 										}
 										return true;
 									}();
@@ -197,17 +196,17 @@ namespace YimMenu::Submenus
 
 			ImGui::SameLine();
 			ImGui::BeginGroup();
-			ImGui::BulletText("Ctrl+Click to set player model");
-			ImGui::Checkbox("Invincible", &invincible);
-			ImGui::Checkbox("Spawn Dead", &spawnDead);
-			ImGui::Checkbox("Spawn As Bodyguard", &spawnAsBodyguard);
-			ImGui::Checkbox("Spawn As Cop", &spawnAsCop);
-			ImGui::Checkbox("Spawn In My Vehicle", &spawnInMyVehicle);
-			ImGui::Checkbox("Give All Weapons", &giveAllWeapons);
-			ImGui::Checkbox("Spawn As Prostitute", &spawnAsProstitute);
-			ImGui::Checkbox("Randomize Outfit", &randomizeOutfit);
-			ImGui::Checkbox("Blip Ped", &blipPed);
-			if (ImGui::Button("Remove All"))
+			ImGui::BulletText("Ctrl+点击设置玩家模型");
+			ImGui::Checkbox("无敌", &invincible);
+			ImGui::Checkbox("生成尸体", &spawnDead);
+			ImGui::Checkbox("生成保镖", &spawnAsBodyguard);
+			ImGui::Checkbox("生成警察", &spawnAsCop);
+			ImGui::Checkbox("生成在载具中", &spawnInMyVehicle);
+			ImGui::Checkbox("给予所有武器", &giveAllWeapons);
+			ImGui::Checkbox("生成妓女", &spawnAsProstitute);
+			ImGui::Checkbox("随机服装", &randomizeOutfit);
+			ImGui::Checkbox("显示光标", &blipPed);
+			if (ImGui::Button("全部移除"))
 			{
 				FiberPool::Push([] {
 					for (auto& ped : spawnedPeds)

@@ -34,11 +34,11 @@ namespace YimMenu::Submenus
 				static ScriptFunction getWeaponHeadshots("mp_weapons"_J, ScriptPointer("GetWeaponHeadshots", "5D ? ? ? 39 11").Add(1).Rip());
 				static ScriptFunction getWeaponAccuracy("mp_weapons"_J, ScriptPointer("GetWeaponAccuracy", "2D 01 09 00 00"));
 
-				kills     = getWeaponKills.Call<int>(weaponHash, -1);
-				deaths    = getWeaponDeaths.Call<int>(weaponHash, -1);
-				kd        = getWeaponKDRatio.Call<float>(weaponHash, -1);
+				kills = getWeaponKills.Call<int>(weaponHash, -1);
+				deaths = getWeaponDeaths.Call<int>(weaponHash, -1);
+				kd = getWeaponKDRatio.Call<float>(weaponHash, -1);
 				headshots = getWeaponHeadshots.Call<int>(weaponHash, -1);
-				accuracy  = static_cast<int>(getWeaponAccuracy.Call<float>(weaponHash));
+				accuracy = static_cast<int>(getWeaponAccuracy.Call<float>(weaponHash));
 
 				thread->Kill();
 				thread->m_Context.m_State = rage::scrThread::State::KILLED;
@@ -167,14 +167,14 @@ namespace YimMenu::Submenus
 
 	static std::shared_ptr<Group> RenderCustomWeaponsMenu()
 	{
-		auto customWeaponsGroup = std::make_shared<Group>("Custom Weapons");
+		auto customWeaponsGroup = std::make_shared<Group>("自定义武器");
 
 		auto cutomWeaponTypes = std::make_shared<Group>("", 1);
 		auto customWeapons = std::make_shared<Group>("");
 		auto paintGunGroup = std::make_shared<Group>("");
 
 		auto cmd = Commands::GetCommand<ListCommand>("customweapontype"_J);
-		
+
 		auto isGravityGunEnabled = [cmd] {
 			return static_cast<Features::CustomWeapons>(cmd->GetState()) == Features::CustomWeapons::GRAVITY_GUN;
 		};
@@ -208,12 +208,12 @@ namespace YimMenu::Submenus
 
 	std::shared_ptr<Category> BuildWeaponsMenu()
 	{
-		auto weapons = std::make_shared<Category>("Weapons");
+		auto weapons = std::make_shared<Category>("武器");
 
-		auto weaponsGlobalsGroup = std::make_shared<Group>("Globals", 12);
-		auto weaponsToolsGroup = std::make_shared<Group>("Tools", 1);
-		auto weaponsAmmuNationGroup = std::make_shared<Group>("Ammu-Nation");
-		auto weaponsAimbotGroup = std::make_shared<Group>("Aimbot", 1);
+		auto weaponsGlobalsGroup = std::make_shared<Group>("全局", 12);
+		auto weaponsToolsGroup = std::make_shared<Group>("工具", 1);
+		auto weaponsAmmuNationGroup = std::make_shared<Group>("军火商");
+		auto weaponsAimbotGroup = std::make_shared<Group>("自瞄", 1);
 
 		weaponsGlobalsGroup->AddItem(std::make_shared<BoolCommandItem>("infiniteammo"_J));
 		weaponsGlobalsGroup->AddItem(std::make_shared<BoolCommandItem>("infiniteclip"_J));
