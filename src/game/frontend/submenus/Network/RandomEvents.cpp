@@ -116,7 +116,7 @@ namespace YimMenu::Submenus
 
 	static void KillActiveEvent()
 	{
-			if (auto eventThread = Scripts::FindScriptThread(randomEventScripts[static_cast<int>(selectedEvent)]))
+		if (auto eventThread = Scripts::FindScriptThread(randomEventScripts[static_cast<int>(selectedEvent)]))
 		{
 			if (auto NetComponent = reinterpret_cast<GtaThread*>(eventThread)->m_NetComponent)
 			{
@@ -277,47 +277,47 @@ namespace YimMenu::Submenus
 						else // Either update event coords TSE not sent yet or event doesn't register a trigger point
 						{
 							Notifications::Show("随机事件", "传送失败：坐标无效或尚未同步。", NotificationType::Error);
-					}
-					else
-					{
-						Notifications::Show("随机事件", "事件当前未在进行中。", NotificationType::Error);
-					}
-				});
+						}
+						else
+						{
+							Notifications::Show("随机事件", "事件当前未在进行中。", NotificationType::Error);
+						}
+					});
 			}
 
 			if (GSBDRandomEvents->EventData[selectedEvent].State == eRandomEventState::ACTIVE)
 			{
-				if (auto eventThread = Scripts::FindScriptThread(randomEventScripts[static_cast<int>(selectedEvent)]))
-				{
-					if (auto netComponent = reinterpret_cast<GtaThread*>(eventThread)->m_NetComponent)
+					if (auto eventThread = Scripts::FindScriptThread(randomEventScripts[static_cast<int>(selectedEvent)]))
 					{
-						if (auto host = netComponent->GetHost())
+						if (auto netComponent = reinterpret_cast<GtaThread*>(eventThread)->m_NetComponent)
 						{
-							ImGui::Text("主机: %s", host->GetName());
+							if (auto host = netComponent->GetHost())
+							{
+								ImGui::Text("主机: %s", host->GetName());
+							}
+							ImGui::SameLine();
+							ImGui::BeginDisabled(netComponent->IsLocalPlayerHost());
+							if (ImGui::SmallButton("获取主机权"))
+							{
+								FiberPool::Push([eventThread] {
+									Scripts::ForceScriptHost(eventThread);
+								});
+							}
+							ImGui::EndDisabled();
 						}
-						ImGui::SameLine();
-						ImGui::BeginDisabled(netComponent->IsLocalPlayerHost());
-						if (ImGui::SmallButton("获取主机权"))
-						{
-							FiberPool::Push([eventThread] {
-								Scripts::ForceScriptHost(eventThread);
-							});
-						}
-						ImGui::EndDisabled();
 					}
-				}
 			}
 
 			ImGui::Text("状态: %s", GetEventStateString().c_str());
 			if (GSBDRandomEvents->EventData[selectedEvent].State == eRandomEventState::INACTIVE)
 			{
-				ImGui::Text("位置: N/A");
-				ImGui::Text("触发范围: N/A");
+					ImGui::Text("位置: N/A");
+					ImGui::Text("触发范围: N/A");
 			}
 			else
 			{
-				ImGui::Text("位置: %d", GSBDRandomEvents->EventData[selectedEvent].Subvariation);
-				ImGui::Text("触发范围: %.2f", GSBDRandomEvents->EventData[selectedEvent].TriggerRange); // Default value is 400, it will be updated once the event switches to the available state
+					ImGui::Text("位置: %d", GSBDRandomEvents->EventData[selectedEvent].Subvariation);
+					ImGui::Text("触发范围: %.2f", GSBDRandomEvents->EventData[selectedEvent].TriggerRange); // Default value is 400, it will be updated once the event switches to the available state
 			}
 
 			// We should probably put this into a separate group, but I just don't want to do the same safety checks before rendering it
@@ -327,8 +327,8 @@ namespace YimMenu::Submenus
 			ImGui::SameLine();
 			if (ImGui::Button("设置冷却时间"))
 			{
-				int value = applyInMinutes ? (setCooldown * 60000) : setCooldown;
-				FMRandomEvents->EventData[selectedEvent].InactiveTime = value;
+					int value = applyInMinutes ? (setCooldown * 60000) : setCooldown;
+					FMRandomEvents->EventData[selectedEvent].InactiveTime = value;
 			}
 			if (ImGui::IsItemHovered())
 				ImGui::SetTooltip("需要自由模式脚本主机权限。");
@@ -337,15 +337,12 @@ namespace YimMenu::Submenus
 			ImGui::SameLine();
 			if (ImGui::Button("设置可用时长"))
 			{
-				int value = applyInMinutes ? (setAvailability * 60000) : setAvailability;
-				FMRandomEvents->EventData[selectedEvent].AvailableTime = value;
+					int value = applyInMinutes ? (setAvailability * 60000) : setAvailability;
+					FMRandomEvents->EventData[selectedEvent].AvailableTime = value;
 			}
 			if (ImGui::IsItemHovered())
 				ImGui::SetTooltip("需要自由模式脚本主机权限。");
 
 			ImGui::Checkbox("按分钟生效", &applyInMinutes);
-		}));
-
-		return menu;
-	}
+			}));
 }
