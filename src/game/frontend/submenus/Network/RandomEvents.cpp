@@ -345,3 +345,4 @@ namespace YimMenu::Submenus
 
 		return menu;
 	}
+}
