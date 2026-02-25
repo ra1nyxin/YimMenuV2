@@ -16,7 +16,7 @@ namespace YimMenu
 	{
 		if (!m_Command)
 		{
-			ImGui::Text("Unknown!");
+			ImGui::Text("未知命令！");
 			return;
 		}
 
@@ -26,7 +26,7 @@ namespace YimMenu
 
 		// TODO: refactor this
 
-		auto windowLabel = std::format("{} Hotkey", m_Command->GetLabel());
+		auto windowLabel = std::format("{} 热键", m_Command->GetLabel());
 
 		if (ImGui::IsItemHovered())
 		{
@@ -38,13 +38,13 @@ namespace YimMenu
 		ImGui::SetNextWindowSize(ImVec2(500, 120));
 		if (ImGui::BeginPopupModal(windowLabel.data(), nullptr, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoScrollbar))
 		{
-			ImGui::BulletText("Hover over the command name to change its hotkey");
-			ImGui::BulletText("Press any registered key to remove");
+			ImGui::BulletText("将鼠标悬停在命令名称上以更改热键");
+			ImGui::BulletText("按下任意已注册按键以移除");
 			ImGui::Separator();
 
 
 			ImGui::Spacing();
-			if (ImGui::Button("Close") || ((!ImGui::IsWindowHovered() && !ImGui::IsAnyItemHovered()) && ImGui::IsMouseClicked(ImGuiMouseButton_Left)))
+			if (ImGui::Button("关闭") || ((!ImGui::IsWindowHovered() && !ImGui::IsAnyItemHovered()) && ImGui::IsMouseClicked(ImGuiMouseButton_Left)))
 				ImGui::CloseCurrentPopup();
 
 			ImGui::EndPopup();

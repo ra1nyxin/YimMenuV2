@@ -44,7 +44,7 @@ namespace YimMenu::Features
 							}
 							else
 							{
-								Notifications::Show("Custom Weapon", "Entity is not a ped.", NotificationType::Warning);
+								Notifications::Show("自定义武器", "目标不是行人。", NotificationType::Warning);
 							}
 						}
 					});
@@ -61,14 +61,14 @@ namespace YimMenu::Features
 					if (RayCast(&m_Entity).Cast())
 					{
 						if (m_Entity.IsPed() && m_Entity.IsPlayer())
-							Notifications::Show("Custom Weapon", "Player entity cannot be deleted.", NotificationType::Warning);
+							Notifications::Show("自定义武器", "无法删除玩家实体。", NotificationType::Warning);
 						else
 						{
 							auto location = m_Entity.GetPosition();
 							auto distance = Self::GetPed().GetPosition().GetDistance(location);
 
 							if (distance > 500)
-								Notifications::Show("Custom Weapon", "Entity is too far.", NotificationType::Warning);
+								Notifications::Show("自定义武器", "目标距离过远。", NotificationType::Warning);
 							else
 								m_Entity.Delete();
 						}
@@ -134,7 +134,7 @@ namespace YimMenu::Features
 
 							if (m_Entity.IsPed() && m_Entity.IsPlayer())
 							{
-								Notifications::Show("Custom Weapon", "Gravity gun cannot be applied on player entity.", NotificationType::Warning);
+								Notifications::Show("自定义武器", "重力枪无法作用于玩家实体。", NotificationType::Warning);
 							}
 							else
 							{
@@ -147,7 +147,7 @@ namespace YimMenu::Features
 
 								if (tempDistance > 500)
 								{
-									Notifications::Show("Custom Weapon", "Entity is too far.", NotificationType::Warning);
+									Notifications::Show("自定义武器", "目标距离过远。", NotificationType::Warning);
 								}
 								else
 								{
@@ -218,7 +218,7 @@ namespace YimMenu::Features
 						}
 						else
 						{
-							Notifications::Show("Custom Weapon", "Invalid vehicle.", NotificationType::Warning);
+							Notifications::Show("自定义武器", "无效的载具。", NotificationType::Warning);
 						}
 					}
 				}
@@ -239,7 +239,7 @@ namespace YimMenu::Features
 						}
 						else
 						{
-							Notifications::Show("Custom Weapon", "Invalid vehicle.", NotificationType::Warning);
+							Notifications::Show("自定义武器", "无效的载具。", NotificationType::Warning);
 						}
 					}
 				}
@@ -256,14 +256,14 @@ namespace YimMenu::Features
 				{
 					if (!_VehicleGunModel.GetString().length())
 					{
-						Notifications::Show("Custom Weapon", "No vehicle model name provided.", NotificationType::Error);
+						Notifications::Show("自定义武器", "未提供载具模型名称。", NotificationType::Error);
 						return;
 					}
 
 					auto modelHash = Joaat(_VehicleGunModel.GetString());
 					if (!STREAMING::IS_MODEL_IN_CDIMAGE(modelHash))
 					{
-						Notifications::Show("Custom Weapon", "Invalid vehicle model name provided.", NotificationType::Error);
+						Notifications::Show("自定义武器", "提供的载具模型名称无效。", NotificationType::Error);
 					}
 					else
 					{

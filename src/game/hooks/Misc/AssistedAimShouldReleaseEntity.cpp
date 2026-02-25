@@ -7,7 +7,7 @@
 
 namespace YimMenu::Hooks
 {
-	static BoolCommand _AimbotReleaseDeadPed{"aimbotreleasedeadped", "Release Dead Target", "Releases the lock-on to the target after they are dead"};
+	static BoolCommand _AimbotReleaseDeadPed{"aimbotreleasedeadped", "目标死亡后解除锁定", "在目标死亡后自动解除辅助瞄准锁定"};
 
 	bool Misc::AssistedAimShouldReleaseEntity(__int64 a1)
 	{

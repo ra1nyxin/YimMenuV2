@@ -7,7 +7,7 @@
 namespace YimMenu::Features
 {
 	static StringCommand _PedModelName{"pedmodelname", "NPC模型", "你想要生成的NPC的模型名称。"};
-	static StringCommand _ObjectModelName{"objectmodelname", "Object Model", "The model name of the object you wish to spawn."};
+	static StringCommand _ObjectModelName{"objectmodelname", "物体模型", "你想要生成的物体的模型名称。"};
 
 
 	class SpawnPed : public Command
@@ -19,7 +19,7 @@ namespace YimMenu::Features
 			auto model = _PedModelName.GetString();
 			if (!model.length())
 			{
-				Notifications::Show("Spawn Ped", "No model name provided.", NotificationType::Error);
+				Notifications::Show("生成 NPC", "未提供模型名称。", NotificationType::Error);
 				return;
 			}
 
@@ -30,7 +30,7 @@ namespace YimMenu::Features
 			}
 			else
 			{
-				Notifications::Show("Spawn Ped", "Invalid model name provided.", NotificationType::Error);
+				Notifications::Show("生成 NPC", "提供的模型名称无效。", NotificationType::Error);
 			}
 		}
 	};
@@ -44,7 +44,7 @@ namespace YimMenu::Features
 			auto model = _ObjectModelName.GetString();
 			if (!model.length())
 			{
-				Notifications::Show("Spawn Object", "No model name provided.", NotificationType::Error);
+				Notifications::Show("生成物体", "未提供模型名称。", NotificationType::Error);
 				return;
 			}
 
@@ -55,7 +55,7 @@ namespace YimMenu::Features
 			}
 			else
 			{
-				Notifications::Show("Spawn Object", "Invalid model name provided.", NotificationType::Error);
+				Notifications::Show("生成物体", "提供的模型名称无效。", NotificationType::Error);
 			}
 		}
 	};

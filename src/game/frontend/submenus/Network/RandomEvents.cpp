@@ -64,16 +64,16 @@ namespace YimMenu::Submenus
 		switch (GSBDRandomEvents->EventData[selectedEvent].State)
 		{
 		case eRandomEventState::INACTIVE:
-			return "Inactive - launching in " + GSBDRandomEvents->EventData[selectedEvent].TimerState.GetRemainingTimeStr(FMRandomEvents->EventData[selectedEvent].InactiveTime);
+			return "未激活 - 将在 " + GSBDRandomEvents->EventData[selectedEvent].TimerState.GetRemainingTimeStr(FMRandomEvents->EventData[selectedEvent].InactiveTime) + " 后尝试启动";
 		case eRandomEventState::AVAILABLE:
-			return "Available - deactivating in " + GSBDRandomEvents->EventData[selectedEvent].TimerState.GetRemainingTimeStr(FMRandomEvents->EventData[selectedEvent].AvailableTime);
+			return "可用 - 将在 " + GSBDRandomEvents->EventData[selectedEvent].TimerState.GetRemainingTimeStr(FMRandomEvents->EventData[selectedEvent].AvailableTime) + " 后停用";
 		case eRandomEventState::ACTIVE:
-			return "Active";
+			return "进行中";
 		case eRandomEventState::CLEANUP:
-			return "Cleanup";
+			return "清理中";
 		}
 
-		return "N/A";
+		return "未知";
 	}
 
 	static int GetNumLocallyActiveEvents()
@@ -134,7 +134,7 @@ namespace YimMenu::Submenus
 		}
 		else
 		{
-			Notifications::Show("Random Events", "Event script is not active. Are you a participant?", NotificationType::Error);
+			Notifications::Show("随机事件", "事件脚本未在运行。你是否为该事件的参与者？", NotificationType::Error);
 		}
 	}
 
@@ -151,29 +151,29 @@ namespace YimMenu::Submenus
 		for (auto& patch : sendUpdateRECoordsTSECooldownPatches)
 			patch->Enable();
 
-		auto menu = std::make_shared<Category>("Random Events");
+		auto menu = std::make_shared<Category>("随机事件");
 
 		menu->AddItem(std::make_unique<ImGuiItem>([] {
 			GPBDFM2 = GPBD_FM_2::Get();
 			GSBDRandomEvents = GSBD_RandomEvents::Get();
 			if (!GPBDFM2 || !GSBDRandomEvents)
-				return ImGui::Text("Freemode global block is not loaded.");
+				return ImGui::Text("自由模式全局区块尚未加载。");
 
 			if (GPBDFM2->Entries[Self::GetPlayer().GetId()].RandomEventsClientData.InitState != eRandomEventClientInitState::INITIALIZED)
-				return ImGui::Text("Random Events are not initialized.");
+				return ImGui::Text("随机事件尚未初始化。");
 
 			if (auto freemode = Scripts::FindScriptThread("freemode"_J))
 			{
 				FMRandomEvents = RANDOM_EVENTS_FREEMODE_DATA::Get(freemode);
 				if (!FMRandomEvents)
-					return ImGui::Text("Freemode stack is not valid.");
+					return ImGui::Text("自由模式脚本栈无效。");
 			}
 			else
 			{
-				return ImGui::Text("Freemode is not running.");
+				return ImGui::Text("自由模式脚本未运行。");
 			}
 
-			if (ImGui::BeginCombo("Select Event", randomEventNames[selectedEvent]))
+			if (ImGui::BeginCombo("选择事件", randomEventNames[selectedEvent]))
 			{
 				for (int event = DRUG_VEHICLE; event < MAX_EVENTS; event++)
 				{
@@ -205,7 +205,7 @@ namespace YimMenu::Submenus
 				ImGui::EndCombo();
 			}
 
-			if (ImGui::InputInt(std::format("Select Location (0-{})", numSubvariations).c_str(), &selectedSubvariation))
+			if (ImGui::InputInt(std::format("选择位置 (0-{})", numSubvariations).c_str(), &selectedSubvariation))
 			{
 				selectedSubvariation = std::clamp(selectedSubvariation, 0, numSubvariations);
 			}
@@ -214,11 +214,11 @@ namespace YimMenu::Submenus
 			static Tunable maxEventsTune{"FMREMAXACTIVATEDEVENTS"_J};
 			int maxActiveEvents = maxEventsTune.IsReady() ? maxEventsTune.Get<int>() : 0;
 			if (numActiveEvents >= maxActiveEvents)
-				ImGui::TextColored(ImVec4(1.0f, 0.0f, 0.0f, 1.0f), "Active Events: %d/%d", numActiveEvents, maxActiveEvents);
+				ImGui::TextColored(ImVec4(1.0f, 0.0f, 0.0f, 1.0f), "活动事件数: %d/%d", numActiveEvents, maxActiveEvents);
 			else
-				ImGui::Text("Active Events: %d/%d", numActiveEvents, maxActiveEvents);
+				ImGui::Text("活动事件数: %d/%d", numActiveEvents, maxActiveEvents);
 
-			if (ImGui::Button("Launch Event"))
+			if (ImGui::Button("启动事件"))
 			{
 				FiberPool::Push([] {
 					if (GSBDRandomEvents->EventData[selectedEvent].State != eRandomEventState::ACTIVE)
@@ -231,21 +231,21 @@ namespace YimMenu::Submenus
 						ScriptMgr::Yield(100ms);
 						if (GSBDRandomEvents->EventData[selectedEvent].State == eRandomEventState::INACTIVE)
 						{
-							Notifications::Show("Random Events", "Failed to launch event. Are you freemode host?", NotificationType::Error);
+							Notifications::Show("随机事件", "启动事件失败。你是自由模式主机吗？", NotificationType::Error);
 						}
 					}
 					else
 					{
-						Notifications::Show("Random Events", "Event is already active.", NotificationType::Error);
+						Notifications::Show("随机事件", "事件已在进行中。", NotificationType::Error);
 					}
 				});
 			}
 			if (ImGui::IsItemHovered())
-				ImGui::SetTooltip("Requires freemode script host.");
+				ImGui::SetTooltip("需要自由模式脚本主机权限。");
 
 			ImGui::SameLine();
 
-			if (ImGui::Button("Kill Event"))
+			if (ImGui::Button("终止事件"))
 			{
 				FiberPool::Push([] {
 					if (GSBDRandomEvents->EventData[selectedEvent].State == eRandomEventState::AVAILABLE)
@@ -258,14 +258,14 @@ namespace YimMenu::Submenus
 					}
 					else
 					{
-						Notifications::Show("Random Events", "Event is not active.", NotificationType::Error);
+						Notifications::Show("随机事件", "事件当前未在进行中。", NotificationType::Error);
 					}
 				});
 			}
 
 			ImGui::SameLine();
 
-			if (ImGui::Button("Teleport to Event"))
+			if (ImGui::Button("传送到事件位置"))
 			{
 				FiberPool::Push([] {
 					if (GSBDRandomEvents->EventData[selectedEvent].State >= eRandomEventState::AVAILABLE)
@@ -276,12 +276,8 @@ namespace YimMenu::Submenus
 						}
 						else // Either update event coords TSE not sent yet or event doesn't register a trigger point
 						{
-							Notifications::Show("Random Events", "Failed to teleport to event. Coordinates are not valid.", NotificationType::Error);
+							Notifications::Show("随机事件", "传送失败：坐标无效或尚未同步。", NotificationType::Error);
 						}
-					}
-					else
-					{
-						Notifications::Show("Random Events", "Event is not active.", NotificationType::Error);
 					}
 				});
 			}
@@ -294,11 +290,11 @@ namespace YimMenu::Submenus
 					{
 						if (auto host = netComponent->GetHost())
 						{
-							ImGui::Text("Host: %s", host->GetName());
+							ImGui::Text("主机: %s", host->GetName());
 						}
 						ImGui::SameLine();
 						ImGui::BeginDisabled(netComponent->IsLocalPlayerHost());
-						if (ImGui::SmallButton("Take Control"))
+						if (ImGui::SmallButton("获取主机权"))
 						{
 							FiberPool::Push([eventThread] {
 								Scripts::ForceScriptHost(eventThread);
@@ -309,42 +305,42 @@ namespace YimMenu::Submenus
 				}
 			}
 
-			ImGui::Text("State: %s", GetEventStateString().c_str());
+			ImGui::Text("状态: %s", GetEventStateString().c_str());
 			if (GSBDRandomEvents->EventData[selectedEvent].State == eRandomEventState::INACTIVE)
 			{
-				ImGui::Text("Location: N/A");
-				ImGui::Text("Trigger Range: N/A");
+				ImGui::Text("位置: N/A");
+				ImGui::Text("触发范围: N/A");
 			}
 			else
 			{
-				ImGui::Text("Location: %d", GSBDRandomEvents->EventData[selectedEvent].Subvariation);
-				ImGui::Text("Trigger Range: %.2f", GSBDRandomEvents->EventData[selectedEvent].TriggerRange); // Default value is 400, it will be updated once the event switches to the available state
+				ImGui::Text("位置: %d", GSBDRandomEvents->EventData[selectedEvent].Subvariation);
+				ImGui::Text("触发范围: %.2f", GSBDRandomEvents->EventData[selectedEvent].TriggerRange); // Default value is 400, it will be updated once the event switches to the available state
 			}
 
 			// We should probably put this into a separate group, but I just don't want to do the same safety checks before rendering it
-			ImGui::SeparatorText("Cooldown & Availability");
+			ImGui::SeparatorText("冷却与可用性");
 
 			ImGui::InputInt("##cooldown", &setCooldown);
 			ImGui::SameLine();
-			if (ImGui::Button("Set Cooldown"))
+			if (ImGui::Button("设置冷却时间"))
 			{
 				int value = applyInMinutes ? (setCooldown * 60000) : setCooldown;
 				FMRandomEvents->EventData[selectedEvent].InactiveTime = value;
 			}
 			if (ImGui::IsItemHovered())
-				ImGui::SetTooltip("Requires freemode script host.");
+				ImGui::SetTooltip("需要自由模式脚本主机权限。");
 
 			ImGui::InputInt("##availability", &setAvailability);
 			ImGui::SameLine();
-			if (ImGui::Button("Set Availability"))
+			if (ImGui::Button("设置可用时长"))
 			{
 				int value = applyInMinutes ? (setAvailability * 60000) : setAvailability;
 				FMRandomEvents->EventData[selectedEvent].AvailableTime = value;
 			}
 			if (ImGui::IsItemHovered())
-				ImGui::SetTooltip("Requires freemode script host.");
+				ImGui::SetTooltip("需要自由模式脚本主机权限。");
 
-			ImGui::Checkbox("Apply in Minutes", &applyInMinutes);
+			ImGui::Checkbox("按分钟生效", &applyInMinutes);
 		}));
 
 		return menu;

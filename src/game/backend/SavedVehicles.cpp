@@ -137,7 +137,7 @@ namespace YimMenu
 			file_stream.close();
 		}
 		else
-			Notifications::Show("Persist Car", "Tried to save a vehicle which does not exist", NotificationType::Warning);
+			Notifications::Show("保存载具", "尝试保存一个不存在的载具。", NotificationType::Warning);
 	}
 
 	void SavedVehicles::Load(std::string folderName, std::string fileName, bool spawnInside)
@@ -148,7 +148,7 @@ namespace YimMenu
 
 			if (!std::filesystem::exists(file))
 			{
-				Notifications::Show("Persist Car", "File does not exist.", NotificationType::Error);
+				Notifications::Show("保存载具", "文件不存在。", NotificationType::Error);
 				return;
 			}
 
@@ -164,10 +164,10 @@ namespace YimMenu
 				{
 					if (spawnInside)
 						Self::GetPed().SetInVehicle(veh.GetHandle());
-					Notifications::Show("Persist Car", std::format("Spawned {}", fileName), NotificationType::Success);
+					Notifications::Show("保存载具", std::format("已生成载具 {}", fileName), NotificationType::Success);
 				}
 				else
-					Notifications::Show("Persist Car", std::format("Unable to spawn {}", fileName), NotificationType::Error);
+					Notifications::Show("保存载具", std::format("无法生成载具 {}", fileName), NotificationType::Error);
 			}
 			catch (std::exception& e)
 			{
@@ -177,7 +177,7 @@ namespace YimMenu
 			file_stream.close();
 		}
 		else
-			Notifications::Show("Persist Car", "Select a file first", NotificationType::Warning);
+			Notifications::Show("保存载具", "请先选择一个文件。", NotificationType::Warning);
 	}
 
 	Vehicle SavedVehicles::SpawnFromJson(nlohmann::json vehicle_json)

@@ -23,11 +23,11 @@ namespace YimMenu::Features
 			}
 
 			if (count > 0)
-				Notifications::Show("Fix All Vehicles", std::format("{} vehicles fixed.", count), NotificationType::Success);
+				Notifications::Show("修复所有载具", std::format("已修复 {} 辆载具。", count), NotificationType::Success);
 			else
-				Notifications::Show("Fix All Vehicles", "No vehicles to fix.");
+				Notifications::Show("修复所有载具", "没有需要修复的载具。");
 		}
 	};
 
-	static FixAllVehicles _FixAllVehicles{"fixallvehicles", "Fix All Vehicles", "Fixes all of your destroyed personal vehicles."};
+	static FixAllVehicles _FixAllVehicles{"fixallvehicles", "修复所有载具", "修复你所有被摧毁的个人载具。"};
 }

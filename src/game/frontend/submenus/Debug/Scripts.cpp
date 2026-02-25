@@ -59,7 +59,7 @@ namespace YimMenu::Submenus
 		ImGui::SetNextItemWidth(150);
 		ImGui::InputText("##jumpoffset", offsetInput, IM_ARRAYSIZE(offsetInput));
 		ImGui::SameLine();
-		if (ImGui::Button("Jump to Offset"))
+		if (ImGui::Button("跳转到偏移"))
 		{
 			char* end = nullptr;
 			std::uint32_t offset = strtoul(offsetInput, &end, 0);
@@ -112,7 +112,7 @@ namespace YimMenu::Submenus
 						}
 						ImGui::PopID();
 						if (ImGui::IsItemActive() && ImGui::IsItemHovered())
-							ImGui::SetTooltip("Press ENTER to write.");
+							ImGui::SetTooltip("按回车键写入。");
 
 						if (i < bytesPerRow - 1)
 							ImGui::SameLine();
@@ -127,11 +127,11 @@ namespace YimMenu::Submenus
 
 	std::shared_ptr<Category> BuildScriptsMenu()
 	{
-		auto menu = std::make_unique<Category>("Scripts");
+		auto menu = std::make_unique<Category>("脚本");
 
-		auto tabBar = std::make_unique<TabBarItem>("Scripts");
-		auto threads = std::make_unique<TabItem>("Threads");
-		auto script = std::make_unique<TabItem>("Start Script");
+		auto tabBar = std::make_unique<TabBarItem>("脚本");
+		auto threads = std::make_unique<TabItem>("线程");
+		auto script = std::make_unique<TabItem>("启动脚本");
 
 		threads->AddItem(std::make_unique<ImGuiItem>([] {
 			static rage::scrThread* curThread = nullptr;
@@ -141,10 +141,10 @@ namespace YimMenu::Submenus
 			{
 				curThread = nullptr;
 				curProgram = nullptr;
-				return ImGui::TextDisabled("None");
+				return ImGui::TextDisabled("无");
 			}
 
-			if (ImGui::BeginCombo("Thread", curThread ? curThread->m_ScriptName : "(Select)"))
+			if (ImGui::BeginCombo("线程", curThread ? curThread->m_ScriptName : "(选择)"))
 			{
 				for (auto thread : *Pointers.ScriptThreads)
 				{
@@ -178,21 +178,21 @@ namespace YimMenu::Submenus
 				return;
 			}
 
-			ImGui::Combo("State", (int*)&curThread->m_Context.m_State, "Idle\0Running\0Killed\0Paused\0Unk4\0");
+			ImGui::Combo("状态", (int*)&curThread->m_Context.m_State, "Idle\0Running\0Killed\0Paused\0Unk4\0");
 
 			if (curThread->m_Context.m_State == rage::scrThread::State::KILLED)
 			{
-				ImGui::Text("Exit Reason: %s", curThread->m_ErrorMessage);
+				ImGui::Text("退出原因: %s", curThread->m_ErrorMessage);
 			}
 			else
 			{
-				if (ImGui::Button("Kill"))
+				if (ImGui::Button("终止"))
 				{
 					curThread->Kill();
 					curThread->m_Context.m_State = rage::scrThread::State::KILLED;
 				}
 				ImGui::SameLine();
-				if (ImGui::Button("Log Labels"))
+				if (ImGui::Button("记录文本标签"))
 				{
 					FiberPool::Push([] {
 						for (int i = 0; i < curProgram->m_StringsCount; i++)
@@ -214,11 +214,11 @@ namespace YimMenu::Submenus
 					{
 						if (auto host = netComponent->GetHost())
 						{
-							ImGui::Text("Host: %s", host->GetName());
+							ImGui::Text("主机: %s", host->GetName());
 						}
 						ImGui::SameLine();
 						ImGui::BeginDisabled(netComponent->IsLocalPlayerHost());
-						if (ImGui::SmallButton("Take Control"))
+						if (ImGui::SmallButton("获取主机权"))
 						{
 							FiberPool::Push([] {
 								Scripts::ForceScriptHost(curThread);
@@ -227,19 +227,19 @@ namespace YimMenu::Submenus
 						ImGui::EndDisabled();
 					}
 					ImGui::BeginGroup();
-					ImGui::Text("Thread ID: %d", curThread->m_Context.m_ThreadId);
-					ImGui::Text("Stack Size: %d", curThread->m_Context.m_StackSize);
-					ImGui::Text("Stack Pointer: 0x%X", curThread->m_Context.m_StackPointer);
-					ImGui::Text("Program Counter: 0x%X", curThread->m_Context.m_ProgramCounter); // This is not really accurate (always points to the WAIT)
-					ImGui::Text("Code Size: %d", curProgram->m_CodeSize);
+					ImGui::Text("线程 ID: %d", curThread->m_Context.m_ThreadId);
+					ImGui::Text("栈大小: %d", curThread->m_Context.m_StackSize);
+					ImGui::Text("栈指针: 0x%X", curThread->m_Context.m_StackPointer);
+					ImGui::Text("程序计数器: 0x%X", curThread->m_Context.m_ProgramCounter); // This is not really accurate (always points to the WAIT)
+					ImGui::Text("代码大小: %d", curProgram->m_CodeSize);
 					ImGui::EndGroup();
 					ImGui::SameLine();
 					ImGui::BeginGroup();
-					ImGui::Text("Arg Count: %d", curProgram->m_ArgCount);
-					ImGui::Text("Local Count: %d", curProgram->m_LocalCount);
-					ImGui::Text("Global Count: %d", curProgram->m_GlobalCount);
-					ImGui::Text("Native Count: %d", curProgram->m_NativeCount);
-					ImGui::Text("String Count: %d", curProgram->m_StringsCount);
+					ImGui::Text("参数数量: %d", curProgram->m_ArgCount);
+					ImGui::Text("局部变量数量: %d", curProgram->m_LocalCount);
+					ImGui::Text("全局变量数量: %d", curProgram->m_GlobalCount);
+					ImGui::Text("原生函数数量: %d", curProgram->m_NativeCount);
+					ImGui::Text("字符串数量: %d", curProgram->m_StringsCount);
 					ImGui::EndGroup();
 					ImGui::TreePop();
 				}
@@ -261,9 +261,9 @@ namespace YimMenu::Submenus
 			static int previousArgCount = 0;
 			static bool pauseAfterStarting = false;
 
-			bool modified = ImGui::InputTextWithHint("Script Name", "Search", &scriptSearch);
+			bool modified = ImGui::InputTextWithHint("脚本名称", "搜索", &scriptSearch);
 
-			if (ImGui::BeginCombo("Stack Size", stackSizeName.c_str()))
+			if (ImGui::BeginCombo("栈大小", stackSizeName.c_str()))
 			{
 				for (auto& p : stackSizes)
 				{
@@ -280,7 +280,7 @@ namespace YimMenu::Submenus
 				ImGui::EndCombo();
 			}
 
-			if (ImGui::InputInt("Arg Count", &argCount))
+			if (ImGui::InputInt("参数数量", &argCount))
 			{
 				if (argCount < 0) // should clamp this to a max value?
 					argCount = 0;
@@ -333,28 +333,28 @@ namespace YimMenu::Submenus
 				launcherIndex = Scripts::GetLauncherIndexFromScript(Joaat(scriptSearch));
 			}
 
-			ImGui::Checkbox("Pause After Starting", &pauseAfterStarting);
+			ImGui::Checkbox("启动后暂停", &pauseAfterStarting);
 
-			if (ImGui::Button("Start Script"))
+			if (ImGui::Button("启动脚本"))
 			{
 				FiberPool::Push([] {
 					auto hash = Joaat(scriptSearch);
 
 					if (!SCRIPT::DOES_SCRIPT_WITH_NAME_HASH_EXIST(hash))
 					{
-						Notifications::Show("Start Script", "Script does not exist.", NotificationType::Error);
+						Notifications::Show("启动脚本", "脚本不存在。", NotificationType::Error);
 						return;
 					}
 
 					if (SCRIPT::GET_NUMBER_OF_THREADS_RUNNING_THE_SCRIPT_WITH_THIS_HASH(hash) > 0)
 					{
-						Notifications::Show("Start Script", "Script is already running.", NotificationType::Error);
+						Notifications::Show("启动脚本", "脚本已在运行。", NotificationType::Error);
 						return;
 					}
 
 					if (MISC::GET_NUMBER_OF_FREE_STACKS_OF_THIS_SIZE(stackSize) == 0)
 					{
-						Notifications::Show("Start Script", "No free stack of this size.", NotificationType::Error);
+						Notifications::Show("启动脚本", "没有可用的该大小脚本栈。", NotificationType::Error);
 						return;
 					}
 
@@ -381,21 +381,21 @@ namespace YimMenu::Submenus
 					}
 
 					SCRIPT::SET_SCRIPT_WITH_NAME_HASH_AS_NO_LONGER_NEEDED(hash);
-					Notifications::Show("Start Script", std::format("Started script with ID {}.", id), NotificationType::Success);
+					Notifications::Show("启动脚本", std::format("已启动脚本，ID 为 {}。", id), NotificationType::Success);
 				});
 			}
 
 			if (launcherIndex && *Pointers.IsSessionStarted)
 			{
 				ImGui::SameLine();
-				if (ImGui::Button("Start Session Script"))
+				if (ImGui::Button("启动战局脚本"))
 				{
 					FiberPool::Push([] {
 						Scripts::StartLauncherScript(Joaat(scriptSearch));
 					});
 				}
 				ImGui::SameLine();
-				if (ImGui::Button("Start Script With Event"))
+				if (ImGui::Button("以事件方式启动脚本"))
 				{
 					FiberPool::Push([] {
 						Scripts::ForceScriptOnPlayer(Joaat(scriptSearch), -1);

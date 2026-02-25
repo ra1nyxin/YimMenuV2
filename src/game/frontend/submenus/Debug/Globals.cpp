@@ -77,15 +77,15 @@ auto editor = std::make_unique<Group>("编辑器");
 			ImGui::BeginGroup();
 
 			ImGui::SetNextItemWidth(200.f);
-			ImGui::InputTextWithHint("##global_name", "Name", globalName, sizeof(globalName));
+			ImGui::InputTextWithHint("##global_name", "名称", globalName, sizeof(globalName));
 			ImGui::SameLine();
-			if (ImGui::Button("Save"))
+			if (ImGui::Button("保存"))
 			{
 				curGlobal.name = globalName;
 				SaveGlobal(curGlobal);
 			}
 			ImGui::SameLine();
-			if (ImGui::Button("Delete"))
+			if (ImGui::Button("删除"))
 			{
 				curGlobal.name = globalName;
 				DeleteGlobal(curGlobal);

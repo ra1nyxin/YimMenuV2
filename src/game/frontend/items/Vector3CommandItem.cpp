@@ -18,7 +18,7 @@ namespace YimMenu
 	{
 		if (!m_Command)
 		{
-			ImGui::Text("Unknown!");
+			ImGui::Text("未知命令！");
 			return;
 		}
 
@@ -31,23 +31,23 @@ namespace YimMenu
 		if (Self::GetPed())
 		{
 			ImGui::SameLine();
-			if (ImGui::Button("Current"))
+			if (ImGui::Button("当前位置"))
 				m_Command->SetState(Self::GetPed().GetPosition());
 		}
 		ImGui::SameLine();
-		if (ImGui::Button("Saved..."))
+		if (ImGui::Button("已保存..."))
 			ImGui::OpenPopup("##saved");
 
 		if (ImGui::BeginPopup("##saved", ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize))
 		{
-			ImGui::Text("Click on a location to select it. Add more at Teleport > Saved");
-			InputTextWithHint("##filter", "Search", &m_CurrentFilter).Draw();
+			ImGui::Text("点击一个位置以选择它。在 传送 > 已保存 中添加更多位置");
+			InputTextWithHint("##filter", "搜索", &m_CurrentFilter).Draw();
 
 			const float max_length = *Pointers.ScreenResY / 3.2;
 
 			// TODO: duplicated code
 			ImGui::BeginGroup();
-			ImGui::Text("Categories");
+			ImGui::Text("分类");
 
 			if (ImGui::BeginListBox("##categories", {200, max_length}))
 			{
@@ -68,7 +68,7 @@ namespace YimMenu
 			ImGui::EndGroup();
 			ImGui::SameLine();
 			ImGui::BeginGroup();
-			ImGui::Text("Locations");
+			ImGui::Text("位置");
 			if (ImGui::BeginListBox("##saved_locs", {200, max_length}))
 			{
 				if (SavedLocations::GetAllSavedLocations().find(m_CurrentCategory) != SavedLocations::GetAllSavedLocations().end())
@@ -102,7 +102,7 @@ namespace YimMenu
 
 			ImGui::EndGroup();
 
-			if (ImGui::Button("Close"))
+			if (ImGui::Button("关闭"))
 			{
 				ImGui::CloseCurrentPopup();
 			}

@@ -71,7 +71,7 @@ namespace YimMenu::Submenus
 	static void RenderPlayerList()
 	{
 		ImGui::SetNextItemWidth(200.f);
-		ImGui::InputTextWithHint("Search", "Search", g_NameToSearch, sizeof(g_NameToSearch));
+		ImGui::InputTextWithHint("搜索", "搜索", g_NameToSearch, sizeof(g_NameToSearch));
 
 		if (ImGui::BeginListBox("###player-list", {180, -100 /* static_cast<float>(*Pointers.ScreenResY - 700 - 38 * 4) */}))
 		{
@@ -79,7 +79,7 @@ namespace YimMenu::Submenus
 
 			if (players.size() == 0)
 			{
-				ImGui::TextDisabled("No saved players");
+				ImGui::TextDisabled("暂无已保存玩家");
 				ImGui::EndListBox();
 				return;
 			}
@@ -112,56 +112,56 @@ namespace YimMenu::Submenus
 		if (ImGui::BeginChild("##player-editor", {500, -100 /* static_cast<float>(*Pointers.ScreenResY - 688 - 38 * 4) */}, 0, ImGuiWindowFlags_NoBackground))
 		{
 			ImGui::SetNextItemWidth(180.f);
-			if (ImGui::InputText("Name", g_SelectedPlayerName, sizeof(g_SelectedPlayerName)))
+			if (ImGui::InputText("名称", g_SelectedPlayerName, sizeof(g_SelectedPlayerName)))
 			{
 				g_SelectedPlayer->m_Name = g_SelectedPlayerName;
 			}
 
 			int old_rid = g_SelectedRid;
 			ImGui::SetNextItemWidth(180.0f);
-			if (ImGui::InputScalar("Rockstar Id", ImGuiDataType_U64, &g_SelectedRid))
+			if (ImGui::InputScalar("Rockstar ID", ImGuiDataType_U64, &g_SelectedRid))
 			{
 				SavedPlayers::UpdateRockstarId(old_rid, g_SelectedRid);
 				g_SelectedPlayer = SavedPlayers::GetPlayerData(g_SelectedRid);
 			}
 
-			ImGui::Checkbox("Track Player", &g_SelectedPlayer->m_TrackPlayer);
+			ImGui::Checkbox("跟踪该玩家", &g_SelectedPlayer->m_TrackPlayer);
 
 			if (g_SelectedPlayer->m_FetchedData)
 			{
 				auto& data = *g_SelectedPlayer->m_FetchedData;
-				ImGui::Text("Session Type: %s", FetchedPlayerData::GameStateToString(data.m_GameState).data());
-				ImGui::Text("Host of Session: %s", data.m_HostOfSession ? "Yes" : "No");
-				ImGui::Text("Is Spectating: %s", data.m_Spectating ? "Yes" : "No");
-				ImGui::Text("Is Job Lobby: %s", data.m_InTransition ? "Yes" : "No");
-				ImGui::Text("Host of Job Lobby: %s", data.m_HostOfTransition ? "Yes" : "No");
+				ImGui::Text("战局类型: %s", FetchedPlayerData::GameStateToString(data.m_GameState).data());
+				ImGui::Text("是否为战局主机: %s", data.m_HostOfSession ? "是" : "否");
+				ImGui::Text("是否旁观中: %s", data.m_Spectating ? "是" : "否");
+				ImGui::Text("是否在任务大厅: %s", data.m_InTransition ? "是" : "否");
+				ImGui::Text("是否为任务大厅主机: %s", data.m_HostOfTransition ? "是" : "否");
 				if (data.m_MissionType != FetchedPlayerData::MissionType::NONE)
 				{
-					ImGui::Text("Mission Type: %s", FetchedPlayerData::MissionTypeToString(data.m_MissionType).data());
+					ImGui::Text("任务类型: %s", FetchedPlayerData::MissionTypeToString(data.m_MissionType).data());
 					if (data.m_MissionName)
-						ImGui::Text("Mission Name: %s", data.m_MissionName->data());
+						ImGui::Text("任务名称: %s", data.m_MissionName->data());
 					else
 						; // TODO: add fetch mission name
 				}
 			}
 			else
 			{
-				ImGui::TextDisabled("Data not fetched yet");
+				ImGui::TextDisabled("数据尚未获取");
 			}
 
-			if (ImGui::Button("Join"))
+			if (ImGui::Button("加入"))
 			{
 				FiberPool::Push([] {
 					Network::JoinRockstarId(g_SelectedRid);
 				});
 			}
 
-			if (ImGui::Button("Save"))
+			if (ImGui::Button("保存"))
 			{
 				SavedPlayers::Save();
 			}
 			ImGui::SameLine();
-			if (ImGui::Button("Remove"))
+			if (ImGui::Button("移除"))
 			{
 				SavedPlayers::RemovePlayerData(g_SelectedRid);
 				g_SelectedPlayer = nullptr;
@@ -183,9 +183,9 @@ namespace YimMenu::Submenus
 		static char name_buf[24]{};
 
 		ImGui::SetNextItemWidth(180.0f);
-		ImGui::InputText("Username", name_buf, sizeof(name_buf));
+		ImGui::InputText("用户名", name_buf, sizeof(name_buf));
 		ImGui::SameLine();
-		if (ImGui::Button("Add"))
+		if (ImGui::Button("添加"))
 			FiberPool::Push([] {
 				auto rid = YimMenu::Network::ResolveRockstarId(name_buf);
 				if (rid)
@@ -194,18 +194,18 @@ namespace YimMenu::Submenus
 				}
 				else
 				{
-					Notifications::Show("Saved Players", "Failed to get RID from username", NotificationType::Error);
+					Notifications::Show("已保存玩家", "无法从用户名获取 RID", NotificationType::Error);
 				}
 			});
 	}
 
 	std::shared_ptr<Category> BuildSavedPlayersMenu()
 	{
-		auto menu = std::make_shared<Category>("Saved Players");
-		auto players = std::make_shared<Group>("Players");
-		auto new_player = std::make_shared<Group>("New");
-		auto tracking = std::make_shared<Group>("Tracking");
-		auto notifications = std::make_shared<Group>("Notifications");
+		auto menu = std::make_shared<Category>("已保存玩家");
+		auto players = std::make_shared<Group>("玩家列表");
+		auto new_player = std::make_shared<Group>("新增");
+		auto tracking = std::make_shared<Group>("跟踪");
+		auto notifications = std::make_shared<Group>("通知");
 
 		players->AddItem(std::make_shared<ImGuiItem>([] {
 			RenderSavedPlayers();
@@ -224,11 +224,11 @@ namespace YimMenu::Submenus
 		notifications->AddItem(std::make_shared<BoolCommandItem>("playerdbnotifyonjoblobby"_J));
 
 		auto update = std::make_shared<Group>("", 1);
-		update->AddItem(std::make_shared<BoolCommandItem>("playerdbautoupdate"_J, "Auto Update"));
-		update->AddItem(std::make_shared<CommandItem>("playerdbupdatenow"_J, "Update Now"));
+		update->AddItem(std::make_shared<BoolCommandItem>("playerdbautoupdate"_J, "自动刷新"));
+		update->AddItem(std::make_shared<CommandItem>("playerdbupdatenow"_J, "立即刷新"));
 
 		tracking->AddItem(std::move(update));
-		tracking->AddItem(std::make_shared<BoolCommandItem>("playerdbnotify"_J, "Tracking Notifications"));
+		tracking->AddItem(std::make_shared<BoolCommandItem>("playerdbnotify"_J, "跟踪通知"));
 		tracking->AddItem(std::make_shared<ConditionalItem>("playerdbnotify"_J, std::move(notifications)));
 
 		menu->AddItem(players);

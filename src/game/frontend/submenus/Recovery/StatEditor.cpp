@@ -249,10 +249,10 @@ namespace YimMenu::Submenus
 		case sStatData::Type::UINT64:
 			return ImGui::InputScalar("Value", ImGuiDataType_U64, &value.m_AsInt);
 		case sStatData::Type::STRING:
-			return ImGui::InputText("Value", value.m_AsString, sizeof(value.m_AsString));
+			return ImGui::InputText("值", value.m_AsString, sizeof(value.m_AsString));
 		default:
 			ImGui::BeginDisabled();
-			ImGui::Text("Data type not supported");
+			ImGui::Text("不支持的数据类型");
 			ImGui::EndDisabled();
 			return false; // data type not supported
 		}

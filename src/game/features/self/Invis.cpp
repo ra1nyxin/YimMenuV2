@@ -3,7 +3,7 @@
 
 namespace YimMenu::Features
 {
-	static BoolCommand _LocallyVisible{"localvis", "Locally Visible", "Be locally visible while remaining invisible to other players"};
+	static BoolCommand _LocallyVisible{"localvis", "本地可见", "对其他玩家保持隐身，但在本地可见"};
 
 	class Invis : public LoopedCommand
 	{
@@ -31,5 +31,5 @@ namespace YimMenu::Features
 		}
 	};
 
-	static Invis _Invis{"invis", "Invisibility", "Be invisible"};
+	static Invis _Invis{"invis", "隐身", "使自己对其他玩家隐身"};
 }
