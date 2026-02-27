@@ -1,9 +1,6 @@
 name: Nightly Build
 
 on:
-  # schedule:
-    # cronjob that triggers every day at 2PM UTC
-    # - cron: "0 14 * * *"
   push:
     branches:
       - master
@@ -23,7 +20,6 @@ jobs:
       should_run: ${{ steps.should_run.outputs.should_run }}
     steps:
       - uses: actions/checkout@v4
-
       - id: should_run
         name: Check if latest commit date is within the previous 24 hours
         run: |
@@ -46,9 +42,6 @@ jobs:
         with:
           submodules: recursive
 
-      - name: Check CMake version
-        run: cmake --version
-
       - name: Setup MSVC environment
         uses: ilammy/msvc-dev-cmd@v1
         with:
@@ -58,7 +51,7 @@ jobs:
         run: cmake -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_BUILD_TYPE=RelWithDebInfo -S . -B build -G Ninja
 
       - name: Build 64bit RelWithDebInfo DLL
-        run: cmake --build ./build --config RelWithDebInfo --target YimMenuV2 --
+        run: cmake --build ./build --config RelWithDebInfo --target YimMenuV2
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
@@ -81,46 +74,25 @@ jobs:
     if: needs.check_recent_commit.outputs.should_run == 'true'
     steps:
       - uses: actions/checkout@v4
+      
+      - name: Configure Git Identity
+        run: |
+          git config --global user.name "ra1nyxin"
+          git config --global user.email "ra1nyxin@users.noreply.github.com"
 
       - name: Delete Existing Release
-        id: delete_release
         uses: actions/github-script@v7
         with:
+          github-token: ${{ secrets.RELEASE_TOKEN }}
           script: |
-            const owner = context.repo.owner;
-            const repo = context.repo.repo;
+            const { owner, repo } = context.repo;
             const tag = "nightly";
-
-            // List all releases and find the release by tag
-            const releases = await github.rest.repos.listReleases({
-              owner: owner,
-              repo: repo,
-            });
-
-            const release = releases.data.find(release => release.tag_name === tag);
-
-            // Check if the release exists and delete it
-            if (release) {
-              await github.rest.repos.deleteRelease({
-                owner: owner,
-                repo: repo,
-                release_id: release.id,
-              });
-              console.log(`Deleted release with ID ${release.id}`);
-            } else {
-              console.log("No existing release to delete");
-            }
-
-            // Delete the tag
             try {
-              await github.rest.git.deleteRef({
-                owner: owner,
-                repo: repo,
-                ref: `tags/${tag}`,
-              });
-              console.log(`Deleted tag ${tag}`);
-            } catch (error) {
-              console.error(`Error deleting tag: ${error.message}`);
+              const { data: release } = await github.rest.repos.getReleaseByTag({ owner, repo, tag });
+              await github.rest.repos.deleteRelease({ owner, repo, release_id: release.id });
+              await github.rest.git.deleteRef({ owner, repo, ref: `tags/${tag}` });
+            } catch (e) {
+              console.log("No release/tag found to delete.");
             }
 
       - name: Download Artifact
@@ -128,40 +100,18 @@ jobs:
         with:
           name: binary
 
-      - name: Echo build sha256
-        id: build_sha
-        run: |
-          sha256sum YimMenuV2.dll > sha256.checksum
-          echo "build_sha=$(cat sha256.checksum)" >> $GITHUB_OUTPUT
-          cat sha256.checksum
-
       - name: Nightly Release
         uses: softprops/action-gh-release@v2.2.2
         with:
+          token: ${{ secrets.RELEASE_TOKEN }}
           name: Nightly [${{ needs.build_nightly.outputs.short_sha }}]
           tag_name: nightly
           body: |
-            **This release has been built by Github Actions**
-            [Link to build](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
-
-            Build SHA256:
-            ```
-            ${{ steps.build_sha.outputs.build_sha }}
-            ```
-            To verify the build SHA256 during the action, click the build link, go-to "Create Release", open the Echo build sha256 step and read the sha256.
-
-            You can download the build artifacts, generate a SHA256 checksum and compare it with the below binary.
-            Build artifacts ARE NOT automatically the same as release assets since release assets can be modified afterwards.
-
-            These are nightly builds of YimMenuV2, they are provided for testing purposes only:
-            - Test if your build environment produces a broken YimMenuV2.dll
-            - Test if source code is out of date and no longer compatible with the current version of Grand Theft Auto V: Enhanced
-
-            If you wish to use this menu as-is you are on your own, no warranty is provided.
-
-            Full Commit Hash:
-            ```
-            ${{ needs.build_nightly.outputs.full_sha }}
-            ```
+            ### YimMenuV2 Nightly Build
+            - **Commit**: [${{ needs.build_nightly.outputs.short_sha }}](${{ github.server_url }}/${{ github.repository }}/commit/${{ needs.build_nightly.outputs.full_sha }})
+            - **Build Log**: [Actions Run](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
+            
+            This is an automated build for personal and close-circle testing.
           files: |
             YimMenuV2.dll
+            YimMenuV2.pdb
